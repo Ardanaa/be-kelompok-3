@@ -35,9 +35,16 @@ const authController = require("./controllers/authController");
 
 // ------------------------- Auth ------------------------- //
 
-app.post("/auth/register", authController.register);
+app.post("/v1/auth/register", authController.handleRegister);
 
-// ------------------------- EndAuth ------------------------- //
+// ------------------------- End Auth ------------------------- //
+
+
+// ------------------------- User Behavior ------------------------- //
+
+// app.update("/user")
+
+// ------------------------- End User Behavior ------------------------- //
 
 app.listen(PORT, () => {
     console.log(`Server berhasil berjalan di port http://localhost:${PORT}`);
