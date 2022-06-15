@@ -22,6 +22,7 @@ app.use("/public/files", express.static(path.join(__dirname, "/storages")));
 // ------------------------- Import Controllers ------------------------- //
 
 const authController = require("./controllers/authController");
+
 const usersController = require("./controllers/usersController");
 
 // ------------------------- End Import Controllers ------------------------- //

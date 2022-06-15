@@ -32,6 +32,7 @@ class UsersRepository {
     // ------------------------- End Register User  ------------------------- //
 
 
+    
     // ------------------------- Update User (Complete Account Info)  ------------------------- //
     
     static async handleUpdateUsers({ id, name, city, address, phoneNumber, picture }) {
