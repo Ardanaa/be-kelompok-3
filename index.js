@@ -42,7 +42,7 @@ app.post("/v1/auth/register", authController.handleRegister);
 // ------------------------- End Auth ------------------------- //
 
 
-// ------------------------- User Behavior ------------------------- //
+// ------------------------- User Behavior (complete account info) ------------------------- //
 
 app.put("/v1/users/update/:id", upload.single("picture"), usersController.handleUpdateUsers);
 
