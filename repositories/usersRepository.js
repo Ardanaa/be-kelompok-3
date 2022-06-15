@@ -29,7 +29,29 @@ class UsersRepository {
         return createdUser;
     }
     
-    // ------------------------- EndRegister User  ------------------------- //
+    // ------------------------- End Register User  ------------------------- //
+
+
+    
+    // ------------------------- Update User (Complete Account Info)  ------------------------- //
+    
+    static async handleUpdateUsers({ id, name, city, address, phoneNumber, picture }) {
+
+        const updatedUser = await Users.update({
+            name,
+            city,
+            address,
+            phoneNumber,
+            picture,
+        }, {
+            where: { id },
+        });
+
+        return updatedUser;
+        
+    }
+
+    // ------------------------- End Update User (Complete Account Info)  ------------------------- //
     
 }
 

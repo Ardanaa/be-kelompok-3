@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
+const upload = require("./utils/fileUpload");
 
 const app = express();
 const PORT = 2000;
@@ -22,6 +23,8 @@ app.use("/public/files", express.static(path.join(__dirname, "/storages")));
 
 const authController = require("./controllers/authController");
 
+const usersController = require("./controllers/usersController");
+
 // ------------------------- End Import Controllers ------------------------- //
 
 
@@ -40,9 +43,9 @@ app.post("/v1/auth/register", authController.handleRegister);
 // ------------------------- End Auth ------------------------- //
 
 
-// ------------------------- User Behavior ------------------------- //
+// ------------------------- User Behavior (complete account info) ------------------------- //
 
-// app.update("/user")
+app.put("/v1/users/update/:id", upload.single("picture"), usersController.handleUpdateUsers);
 
 // ------------------------- End User Behavior ------------------------- //
 
