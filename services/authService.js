@@ -6,7 +6,7 @@ class AuthService {
 
     // ------------------------- Auth Register ------------------------- //
 
-    static async register({ name, email, password }) {
+    static async handleRegister({ name, email, password }) {
 
         // ------------------------- Payload Validation ------------------------- //
 
