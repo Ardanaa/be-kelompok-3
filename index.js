@@ -30,6 +30,7 @@ const usersController = require("./controllers/usersController");
 
 
 // ------------------------- Import middlewares ------------------------- //
+const middleware = require("./middlewares/auth");
 // ------------------------- End Import middlewares ------------------------- //
 
 
@@ -39,13 +40,14 @@ const usersController = require("./controllers/usersController");
 // ------------------------- Auth ------------------------- //
 
 app.post("/v1/auth/register", authController.handleRegister);
+app.post("/v1/auth/login", authController.handleLogin);
 
 // ------------------------- End Auth ------------------------- //
 
 
 // ------------------------- User Behavior (complete account info) ------------------------- //
 
-app.put("/v1/users/update/:id", upload.single("picture"), usersController.handleUpdateUsers);
+app.put("/v1/users/update/:id",middleware.authenticate, upload.single("picture"), usersController.handleUpdateUsers);
 
 // ------------------------- End User Behavior ------------------------- //
 
