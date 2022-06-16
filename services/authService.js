@@ -87,8 +87,13 @@ class AuthService {
 
     // ------------------------- End Auth Register ------------------------- //
 
+
+
     // ------------------------- Auth Login ------------------------- //
     static async handleLogin ({ email, password}) {
+        
+        // ------------------------- Payload Validation ------------------------- //
+        
         if(!email){
             return {
                 status: false,
@@ -99,7 +104,7 @@ class AuthService {
                 },
             };
         }
-        // ------------------------- Payload Validation ------------------------- //
+        
         if(!password){
             return {
             status: false,
@@ -119,6 +124,7 @@ class AuthService {
                 },
             };
         }
+
         // Flow Login
         // 1. Get data user sesuai dengan request email
         const getUser = await usersRepository.getUserByEmail({email});
@@ -133,8 +139,10 @@ class AuthService {
                 },
             };
         }else{
+            
             const isPasswordMatch = await bcrypt.compare(password, getUser.password);
-          // 2. Bandingkan password user dengan password di database
+    
+            // 2. Bandingkan password user dengan password di database
             if (isPasswordMatch) {
                 const token = jwt.sign ({
                     id : getUser.id,
@@ -144,6 +152,7 @@ class AuthService {
                 {
                 expiresIn: JWT.EXPIRED,
                 });
+            
             // 3. Kasih response berhasil login
             return{
                 status: true,
@@ -166,6 +175,7 @@ class AuthService {
         }
     }
     // ------------------------- End Auth Login ------------------------- //
+    
 };
 
 module.exports = AuthService;

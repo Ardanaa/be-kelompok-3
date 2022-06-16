@@ -41,6 +41,7 @@ const middleware = require("./middlewares/auth");
 
 app.post("/v1/auth/register", authController.handleRegister);
 app.post("/v1/auth/login", authController.handleLogin);
+app.get("/v1/auth/me", middleware.authenticate, authController.handleCurrentUser);
 
 // ------------------------- End Auth ------------------------- //
 
