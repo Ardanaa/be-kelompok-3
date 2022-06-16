@@ -1,5 +1,8 @@
 const usersRepository = require("../repositories/usersRepository");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { JWT } = require("../lib/const");
+
 const SALT_ROUND = 10;
 
 class AuthService {
@@ -83,6 +86,86 @@ class AuthService {
     }
 
     // ------------------------- End Auth Register ------------------------- //
+
+    // ------------------------- Auth Login ------------------------- //
+    static async handleLogin ({ email, password}) {
+        if(!email){
+            return {
+                status: false,
+                status_code: 400,
+                message: "Email wajib diisi",
+                data : {
+                    registered_user: null,
+                },
+            };
+        }
+        // ------------------------- Payload Validation ------------------------- //
+        if(!password){
+            return {
+            status: false,
+            status_code: 400,
+            message: "Password wajib diisi",
+            data : {
+                registered_user: null,
+            },
+            };
+        }else if(password.length < 8){
+            return {
+                status: false,
+                status_code: 400,
+                message: "Password minimal 8 karakter",
+                data : {
+                    registered_user: null,
+                },
+            };
+        }
+        // Flow Login
+        // 1. Get data user sesuai dengan request email
+        const getUser = await usersRepository.getUserByEmail({email});
+    
+        if (!getUser){
+            return{
+                status: false,
+                status_code: 404,
+                message: "Email belum terdaftar",
+                data: {
+                    user: null,
+                },
+            };
+        }else{
+            const isPasswordMatch = await bcrypt.compare(password, getUser.password);
+          // 2. Bandingkan password user dengan password di database
+            if (isPasswordMatch) {
+                const token = jwt.sign ({
+                    id : getUser.id,
+                    email : getUser.email,
+                }, 
+                JWT.SECRET,
+                {
+                expiresIn: JWT.EXPIRED,
+                });
+            // 3. Kasih response berhasil login
+            return{
+                status: true,
+                status_code: 200,
+                message: "User berhasil login",
+                data: {
+                    token,
+                },
+            };
+            }else{
+                return{
+                    status: false,
+                    status_code: 400,
+                    message: "Password salah",
+                    data:{
+                        user: null,
+                    },
+                };
+            }
+        }
+    }
+    // ------------------------- End Auth Login ------------------------- //
 };
 
 module.exports = AuthService;
