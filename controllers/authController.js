@@ -20,4 +20,25 @@ const handleRegister = async (req, res) => {
 
 // ------------------------- End Auth Register ------------------------- //
 
-module.exports = { handleRegister };
+// ------------------------- Auth Login ------------------------- //
+
+const handleLogin = async (req, res) => {
+    const {email, password} = req.body;
+
+    const {status, status_code, message, data} = await authService.handleLogin({
+        email,
+        password,
+    });
+
+    res.status(status_code).send({
+        status : status,
+        message: message,
+        data : data,
+    });
+};
+
+// ------------------------- End Auth Login ------------------------- //
+
+
+
+module.exports = { handleRegister, handleLogin };
