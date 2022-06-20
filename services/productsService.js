@@ -2,6 +2,24 @@ const productsRepository = require("../repositories/productsRepository");
 
 class ProductsService{
 
+    // ------------------------- Handle Get All Product (Service) ------------------------- //
+
+    static async handleGetAllProducts(){
+        const handleGetAllProducts = await productsRepository.handleGetAllProducts();
+
+        return {
+            status: true,
+            status_code: 200,
+            message: "Semua produk berhasil ditampilkan!",
+            data: {
+                handle_get_all_product: handleGetAllProducts,
+            },
+        };
+    }
+
+    // ------------------------- End Handle Get All Product (Service) ------------------------- //
+    
+    
     // ------------------------- Handle Create Product (Service) ------------------------- //
 
     static async handleCreateProduct({ 

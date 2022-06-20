@@ -1,5 +1,20 @@
 const productsService = require("../services/productsService");
 
+// ------------------------- Handle Get All Product (Controller) ------------------------- //
+
+const handleGetAllProducts = async (req, res) => {
+    const { status, status_code, message, data } = await productsService.handleGetAllProducts({});
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+}
+
+// ------------------------- End Handle Get All Product (Controller) ------------------------- //
+
+
 // ------------------------- Handle Create Product (Controller) ------------------------- //
 
 const handleCreateProduct = async (req, res) => {
@@ -33,4 +48,4 @@ const handleCreateProduct = async (req, res) => {
 
 // ------------------------- End Handle Create Product (Controller) ------------------------- //
 
-module.exports = { handleCreateProduct };
+module.exports = { handleCreateProduct, handleGetAllProducts };
