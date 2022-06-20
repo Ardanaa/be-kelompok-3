@@ -58,6 +58,7 @@ app.put("/v1/users/update/:id", middleware.authenticate, uploadPictureUsers.sing
 
 // ------------------------- Product System ------------------------- //
 
+app.get("/v1/products", productsController.handleGetAllProducts);
 app.post("/v1/products/create", middleware.authenticate, uploadPictureProducts.fields([{name: "picture"}]), productsController.handleCreateProduct);
 
 // ------------------------- End Product System ------------------------- //
