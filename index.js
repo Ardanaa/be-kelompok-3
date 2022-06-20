@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
-const upload = require("./utils/fileUpload");
+const uploadPictureProducts = require("./utils/fileUpload");
+const uploadPictureUsers = require("./utils/fileUploadUsers");
 
 const app = express();
 const PORT = 2000;
@@ -49,7 +50,7 @@ app.post("/v1/auth/login", authController.handleLogin);
 
 // ------------------------- User Behavior (complete account info) ------------------------- //
 
-app.put("/v1/users/update/:id", middleware.authenticate, upload.single("picture"), usersController.handleUpdateUsers);
+app.put("/v1/users/update/:id", middleware.authenticate, uploadPictureUsers.single("picture"), usersController.handleUpdateUsers);
 
 // ------------------------- End User Behavior ------------------------- //
 
@@ -57,7 +58,7 @@ app.put("/v1/users/update/:id", middleware.authenticate, upload.single("picture"
 
 // ------------------------- Product System ------------------------- //
 
-app.post("/v1/products/create", middleware.authenticate, upload.fields([{name: "picture"}]), productsController.handleCreateProduct);
+app.post("/v1/products/create", middleware.authenticate, uploadPictureProducts.fields([{name: "picture"}]), productsController.handleCreateProduct);
 
 // ------------------------- End Product System ------------------------- //
 
