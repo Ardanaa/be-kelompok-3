@@ -25,6 +25,8 @@ const authController = require("./controllers/authController");
 
 const usersController = require("./controllers/usersController");
 
+const productsController = require("./controllers/productsController");
+
 // ------------------------- End Import Controllers ------------------------- //
 
 
@@ -47,9 +49,17 @@ app.post("/v1/auth/login", authController.handleLogin);
 
 // ------------------------- User Behavior (complete account info) ------------------------- //
 
-app.put("/v1/users/update/:id",middleware.authenticate, upload.single("picture"), usersController.handleUpdateUsers);
+app.put("/v1/users/update/:id", middleware.authenticate, upload.single("picture"), usersController.handleUpdateUsers);
 
 // ------------------------- End User Behavior ------------------------- //
+
+
+
+// ------------------------- Product System ------------------------- //
+
+app.post("/v1/products/create", middleware.authenticate, upload.fields([{name: "image"}]), productsController.handleCreateProduct);
+
+// ------------------------- End Product System ------------------------- //
 
 app.listen(PORT, () => {
     console.log(`Server berhasil berjalan di port http://localhost:${PORT}`);
