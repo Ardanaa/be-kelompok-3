@@ -23,7 +23,7 @@ class ProductsService{
     // ------------------------- Handle Create Product (Service) ------------------------- //
 
     static async handleCreateProduct({ 
-        product_id, 
+        user_id, 
         name, 
         price, 
         category, 
@@ -100,7 +100,7 @@ class ProductsService{
         }
 
         const handleCreatedProduct = await productsRepository.handleCreateProduct({
-            product_id,
+            user_id,
             name,
             price,
             category,

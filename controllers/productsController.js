@@ -27,10 +27,10 @@ const handleCreateProduct = async (req, res) => {
         isPublish,
     } = req.body;
 
-    const product_id = req.user.id;
+    const user_id = req.user.id;
 
     const { status, status_code, message, data } = await productsService.handleCreateProduct({
-        product_id,
+        user_id,
         name,
         price,
         category,

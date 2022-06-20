@@ -16,7 +16,7 @@ class ProductsRepository {
     // ------------------------- Handle Create Product (Repository) ------------------------- //
     
     static async handleCreateProduct({
-        product_id,
+        user_id,
         name,
         price,
         category,
@@ -25,7 +25,7 @@ class ProductsRepository {
         isPublish,
     }) {
         const handleCreatedProduct = Products.create({
-            product_id,
+            user_id,
             name,
             price,
             category,
