@@ -88,7 +88,7 @@ class ProductsService{
             };
         }
 
-        if (picture.length > 5) {
+        if (picture.length >= 5) {
             return {
                 status: false,
                 status_code: 400,
