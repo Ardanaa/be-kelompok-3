@@ -57,7 +57,7 @@ app.put("/v1/users/update/:id", middleware.authenticate, upload.single("picture"
 
 // ------------------------- Product System ------------------------- //
 
-app.post("/v1/products/create", middleware.authenticate, upload.fields([{name: "image"}]), productsController.handleCreateProduct);
+app.post("/v1/products/create", middleware.authenticate, upload.fields([{name: "picture"}]), productsController.handleCreateProduct);
 
 // ------------------------- End Product System ------------------------- //
 
