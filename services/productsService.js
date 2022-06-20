@@ -59,7 +59,7 @@ class ProductsService{
             };
         }
 
-        if (!picture?.length) {
+        if (!picture.length) {
             return {
                 status: false,
                 status_code: 400,
@@ -70,7 +70,7 @@ class ProductsService{
             };
         }
 
-        if (picture?.length >= 5 ) {
+        if (picture.length > 5) {
             return {
                 status: false,
                 status_code: 400,

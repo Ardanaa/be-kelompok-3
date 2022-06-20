@@ -20,7 +20,7 @@ const handleCreateProduct = async (req, res) => {
         price,
         category,
         description,
-        picture: req.uploaded_image,
+        picture: req.uploaded_picture,
         isPublish,
     });
 
