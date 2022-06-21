@@ -148,7 +148,8 @@ class ProductsService{
                 category,
                 description,
                 picture,
-                isPublish
+                isPublish,
+                isSold
             });
     
             return {
