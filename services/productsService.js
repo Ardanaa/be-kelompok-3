@@ -46,7 +46,8 @@ class ProductsService{
         category, 
         description, 
         picture, 
-        isPublish }) {
+        isPublish,
+        isSold }) {
         
         try {
 
@@ -117,6 +118,28 @@ class ProductsService{
                     },
                 };
             }
+    
+            if (isPublish === null) {
+                return {
+                    status: false,
+                    code_status: 400,
+                    message: "isPublish wajib diisi!",
+                    data: {
+                        handle_created_product: null,
+                    }
+                }
+            };
+
+            if (isSold === null) {
+                return {
+                    status: false,
+                    code_status: 400,
+                    message: "isSold wajib diisi!",
+                    data: {
+                        handle_created_product: null,
+                    }
+                }
+            };
     
             const handleCreatedProduct = await productsRepository.handleCreateProduct({
                 user_id,

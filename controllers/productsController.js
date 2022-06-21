@@ -33,6 +33,7 @@ const handleCreateProduct = async (req, res) => {
         category,
         description,
         isPublish,
+        isSold
     } = req.body;
 
     const user_id = req.user.id;
@@ -45,6 +46,7 @@ const handleCreateProduct = async (req, res) => {
         description,
         picture: req.uploaded_picture,
         isPublish,
+        isSold
     });
 
     res.status(status_code).send({

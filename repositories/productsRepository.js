@@ -45,6 +45,7 @@ class ProductsRepository {
         description,
         picture,
         isPublish,
+        isSold
     }) {
         const handleCreatedProduct = Products.create({
             user_id,
@@ -53,7 +54,8 @@ class ProductsRepository {
             category,
             description,
             picture,
-            isPublish
+            isPublish,
+            isSold
         });
 
         return handleCreatedProduct;
