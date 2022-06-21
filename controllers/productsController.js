@@ -3,7 +3,15 @@ const productsService = require("../services/productsService");
 // ------------------------- Handle Get All Product (Controller) ------------------------- //
 
 const handleGetAllProducts = async (req, res) => {
-    const { status, status_code, message, data } = await productsService.handleGetAllProducts({});
+
+    const { name, category, isPublish, isSold } = req.query;
+
+    const { status, status_code, message, data } = await productsService.handleGetAllProducts({
+        name, 
+        category, 
+        isPublish, 
+        isSold
+    });
 
     res.status(status_code).send({
         status: status,

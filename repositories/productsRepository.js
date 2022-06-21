@@ -4,8 +4,30 @@ class ProductsRepository {
 
     // ------------------------- Handle Get All Product (Repository) ------------------------- //
     
-    static async handleGetAllProducts(){
-        const handleGetAllProducts = await Products.findAll();
+    static async handleGetAllProducts({ name, category, isPublish, isSold }){
+
+        const query = {
+            where: {},
+            like: {},
+        };
+
+        if (name) {
+            query.like = { ...query.like, name }
+        }
+
+        if (category) {
+            query.where = { ...query.where, category }
+        }
+
+        if (isPublish) {
+            query.where = { ...query.where, isPublish }
+        }
+
+        if (isSold) {
+            query.where = { ...query.where, isSold }
+        }
+
+        const handleGetAllProducts = await Products.findAll(query);
 
         return handleGetAllProducts;
     }
