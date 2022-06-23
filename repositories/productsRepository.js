@@ -104,7 +104,7 @@ class ProductsRepository {
     // ------------------------- Handle Delete Product (Repository) ------------------------- //
 
     static async handleDeleteProductById({ id }) {
-        const handleDeletedProductById = await Post.destroy({where: { id }});
+        const handleDeletedProductById = await Products.destroy({where: { id }});
     
         return handleDeletedProductById;
     } 
