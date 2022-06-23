@@ -12,7 +12,7 @@ class ProductsRepository {
         };
 
         if (name) {
-            query.like = { ...query.like, name }
+            query.where = { ...query.where, name }
         }
 
         if (category) {
