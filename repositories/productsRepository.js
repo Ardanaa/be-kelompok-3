@@ -35,6 +35,22 @@ class ProductsRepository {
     // ------------------------- End Handle Get All Product (Repository) ------------------------- //
 
 
+
+    // ------------------------- Handle Get Product By Id (Repository) ------------------------- //
+    
+    static async handleGetProductById({ id }) {
+        const getProductById = await Products.findOne({
+            where: { id },
+        });
+
+        return getProductById;
+    }
+
+
+    // ------------------------- End Handle Get Product By Id (Repository) ------------------------- //
+
+
+
     // ------------------------- Handle Create Product (Repository) ------------------------- //
     
     static async handleCreateProduct({

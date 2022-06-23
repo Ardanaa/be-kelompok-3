@@ -35,8 +35,42 @@ class ProductsService{
     }
 
     // ------------------------- End Handle Get All Product (Service) ------------------------- //
+
+
+
+    // ------------------------- Handle Get Product By Id (Service) ------------------------- //
+
+    static async handleGetProductById({ id }) {
+        
+        try {
+            const getProductById = await productsRepository.handleGetProductById({ id });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "Success get product by id.",
+                data: {
+                    get_product_by_id: getProductById,
+                },
+            };
+            
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    registered_user: null,
+                },
+            };
+        }
+    }
+
+    // ------------------------- End Handle Get Product By Id (Service) ------------------------- //
     
     
+
+
     // ------------------------- Handle Create Product (Service) ------------------------- //
 
     static async handleCreateProduct({ 
