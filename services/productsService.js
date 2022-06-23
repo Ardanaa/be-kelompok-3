@@ -207,6 +207,111 @@ class ProductsService{
     }
 
     // ------------------------- End Handle Create Product (Service) ------------------------- //
+
+
+    // ------------------------- Handle Update Product (Service) ------------------------- //
+
+    static async handleUpdateProductById ({ 
+        id, 
+        user_id, 
+        name, 
+        price, 
+        category, 
+        description, 
+        picture,
+        isPublish}) {
+
+        try {
+            const getProductById = await productsRepository.handleGetProductById({ id });
+    
+            if(getProductById.user_id == user_id){ 
+                const updatedProductById = await productsRepository.handleUpdateProductById({
+                    id,
+                    name,
+                    price,
+                    category,
+                    description,
+                    picture,
+                    isPublish,
+                });
+        
+                return{
+                    status: true,
+                    status_code: 200,
+                    message: "Product updated successfully",
+                    data:{
+                        updated_post: updatedProductById,
+                    },
+                };
+
+            }else{
+                return{
+                    status: false,
+                    status_code: 401,
+                    message: "Resource Unauthorized",
+                    data:{
+                        handle_updated_product: null,
+                    },
+                }
+            }
+        }catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    handle_updated_product: null,
+                },
+            };
+        }
+        }
+
+    // ------------------------- End Handle Update Product (Service) ------------------------- //
+
+
+    // ------------------------- Handle Delete Product (Service) ------------------------- //
+
+    static async handleDeleteProductById ({ id, user_id}) {
+        try{
+            const getProductById = await productsRepository.handleGetProductById({ id });
+    
+            if(getProductById.user_id == user_id){ 
+                const deletedProductById = await productsRepository.handleDeleteProductById({
+                    id,
+                });
+        
+                return{
+                    status: true,
+                    status_code: 200,
+                    message: "Product deleted successfully",
+                    data:{
+                        deleted_product: deletedProductById,
+                    },
+                };
+            }else{
+                return{
+                    status: false,
+                    status_code: 401,
+                    message: "Resource Unauthorized",
+                    data:{
+                        handle_deleted_product: null,
+                    },
+                }
+            }
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    handle_deleted_product: null,
+                },
+            };
+        }
+    }
+
+    // ------------------------- End Handle Delete Product (Service) ------------------------- //
+        
 };
 
 module.exports = ProductsService;

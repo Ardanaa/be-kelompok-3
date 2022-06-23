@@ -80,4 +80,61 @@ const handleCreateProduct = async (req, res, next) => {
 
 // ------------------------- End Handle Create Product (Controller) ------------------------- //
 
-module.exports = { handleCreateProduct, handleGetAllProducts, handleGetProductById };
+
+// ------------------------- Handle Update Product (Controller) ------------------------- //
+
+const handleUpdateProductById = async (req,res, next) => {
+    const {name, price, category, description, isPublish} = req.body;
+    const {id} = req.params;
+
+    const user_id = req.user.id;
+
+    const {status, status_code, message, data} = await productsService.handleUpdateProductById({
+        id,
+        user_id,
+        name,
+        price,
+        category,
+        description,
+        picture: req.uploaded_picture,
+        isPublish,
+    });
+
+    res.status(status_code).send({
+        status : status,
+        message: message,
+        data : data,
+    });
+};
+
+// ------------------------- End Handle Update Product (Controller) ------------------------- //
+
+
+// ------------------------- Handle Delete Product (Controller) ------------------------- //
+
+const handleDeleteProductById = async (req,res, next) => {
+    const {id} = req.params;
+
+    const user_id = req.user.id;
+
+    const {status, status_code, message, data} = await productsService.handleDeleteProductById({
+        id,
+        user_id,
+    });
+
+    res.status(status_code).send({
+        status : status,
+        message: message,
+        data : data,
+    });
+};
+
+// ------------------------- End Handle Update Product (Controller) ------------------------- //
+
+
+module.exports = { 
+    handleCreateProduct, 
+    handleGetAllProducts, 
+    handleGetProductById, 
+    handleUpdateProductById, 
+    handleDeleteProductById };

@@ -81,6 +81,37 @@ class ProductsRepository {
     // ------------------------- End Handle Create Product (Repository) ------------------------- //
 
 
+    // ------------------------- Handle Update Product (Repository) ------------------------- //
+
+    static async handleUpdateProductById({ id, name, price, category, description, picture,isPublish }) {
+        const handleUpdatedProductById = await Products.update({
+            name,
+            price,
+            category,
+            description,
+            picture,
+            isPublish,
+        },
+            {where: { id } }
+        );
+    
+        return handleUpdatedProductById;
+    }
+
+    // ------------------------- End Handle Update Product (Repository) ------------------------- //
+
+
+    // ------------------------- Handle Delete Product (Repository) ------------------------- //
+
+    static async handleDeleteProductById({ id }) {
+        const handleDeletedProductById = await Post.destroy({where: { id }});
+    
+        return handleDeletedProductById;
+    } 
+
+    // ------------------------- End Handle Delete Product (Repository) ------------------------- //
+
+
 };
 
 module.exports = ProductsRepository;
