@@ -36,9 +36,9 @@ class ProductsRepository {
             query.where = { ...query.where, isSold };
         }
 
-        const getDataWithBoolean = await Products.findAll(query);
+        const getDataWhereQuery = await Products.findAll(query);
 
-        return getDataWithBoolean;
+        return getDataWhereQuery;
     }
 
     // ------------------------- End Handle Get All Product (Repository) ------------------------- //
