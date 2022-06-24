@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      product_id: {
+      user_id: {
         type: Sequelize.INTEGER
       },
       name: {
@@ -24,9 +24,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       picture: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       isPublish: {
+        type: Sequelize.BOOLEAN
+      },
+      isSold: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {

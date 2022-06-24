@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
-const upload = require("./utils/fileUpload");
+const uploadPictureProducts = require("./utils/fileUpload");
+const uploadPictureUsers = require("./utils/fileUploadUsers");
 
 const app = express();
 const PORT = 2000;
@@ -24,6 +25,8 @@ app.use("/public/files", express.static(path.join(__dirname, "/storages")));
 const authController = require("./controllers/authController");
 
 const usersController = require("./controllers/usersController");
+
+const productsController = require("./controllers/productsController");
 
 // ------------------------- End Import Controllers ------------------------- //
 
@@ -48,9 +51,21 @@ app.get("/v1/auth/me", middleware.authenticate, authController.handleCurrentUser
 
 // ------------------------- User Behavior (complete account info) ------------------------- //
 
-app.put("/v1/users/update/:id",middleware.authenticate, upload.single("picture"), usersController.handleUpdateUsers);
+app.put("/v1/users/update/:id", middleware.authenticate, uploadPictureUsers.single("picture"), usersController.handleUpdateUsers);
 
 // ------------------------- End User Behavior ------------------------- //
+
+
+
+// ------------------------- Product System ------------------------- //
+
+app.get("/v1/products/search", productsController.handleGetAllProducts);
+app.post("/v1/products/create", middleware.authenticate, uploadPictureProducts.fields([{name: "picture"}]), productsController.handleCreateProduct);
+app.get("/v1/products/:id", middleware.authenticate, productsController.handleGetProductById);
+app.put("/v1/products/update/:id", middleware.authenticate,uploadPictureProducts.fields([{name: "picture"}]), productsController.handleUpdateProductById);
+app.delete("/v1/products/delete/:id", middleware.authenticate,productsController.handleDeleteProductById);
+
+// ------------------------- End Product System ------------------------- //
 
 app.listen(PORT, () => {
     console.log(`Server berhasil berjalan di port http://localhost:${PORT}`);
