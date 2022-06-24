@@ -12,9 +12,28 @@ const handleGetAllUsers = async (req, res) => {
         message: message,
         data: data,
     });
-}
+};
 
 // ------------------------- End Handle Get All Users ------------------------- //
+
+
+
+// ------------------------- Handle Get User By Id ------------------------- //
+
+const handleGetUserById = async (req, res, next) => {
+    
+    const { id } = req.params;
+
+    const { status, status_code, message, data} = await usersService.handleGetUserById({ id });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+};
+
+// ------------------------- End Handle Get User By Id ------------------------- //
 
 
 
@@ -44,4 +63,4 @@ const handleUpdateUsers = async (req, res, next) => {
 
 // ------------------------- End Handle Update Users ------------------------- //
 
-module.exports = { handleUpdateUsers, handleGetAllUsers };
+module.exports = { handleUpdateUsers, handleGetAllUsers, handleGetUserById };

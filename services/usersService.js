@@ -16,10 +16,27 @@ class UsersServive {
                 handle_get_all_users: handleGetAllUsers,
             },
         };
-    }
+    };
 
     // ------------------------- End Handle Get All Users ------------------------- //
 
+
+    // ------------------------- Handle Get User By Id ------------------------- //
+
+    static async handleGetUserById({ id }){
+        const handleGetUserById = await usersRepository.handleGetUserById({id});
+
+        return {
+            status: true,
+            status_code: 200,
+            message: "Berhasil mendapatkan data user berdasarkan id",
+            data: {
+                handle_get_user_by_id: handleGetUserById,
+            },
+        };
+    };
+
+    // ------------------------- End Handle Get User By Id ------------------------- //
 
 
     // ------------------------- Handle Update Users ------------------------- //
@@ -43,7 +60,7 @@ class UsersServive {
                 updated_user: updatedUser,
             },
         };
-    }
+    };
 
     // ------------------------- End Handle Update Users ------------------------- //
 

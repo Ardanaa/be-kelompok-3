@@ -9,9 +9,22 @@ class UsersRepository {
         const handleGetAllUsers = await Users.findAll();
 
         return handleGetAllUsers;
-    }
+    };
 
     // ------------------------- End Handle Get All Users ------------------------- //
+
+
+    // ------------------------- End Handle Get User By Id ------------------------- //
+
+    static async handleGetUserById({ id }){
+        const handleGetUserById = await Users.findOne({
+            where: { id }
+        });
+
+        return handleGetUserById;
+    }
+
+    // ------------------------- End Handle Get User By Id ------------------------- //
 
 
 
@@ -25,7 +38,7 @@ class UsersRepository {
         });
 
         return getUser;
-    }
+    };
 
     // ------------------------- End Get User By Email  ------------------------- //
 
@@ -40,7 +53,7 @@ class UsersRepository {
         });
 
         return createdUser;
-    }
+    };
     
     // ------------------------- End Register User  ------------------------- //
 
@@ -62,7 +75,7 @@ class UsersRepository {
 
         return updatedUser;
         
-    }
+    };
 
     // ------------------------- End Update User (Complete Account Info)  ------------------------- //
     
