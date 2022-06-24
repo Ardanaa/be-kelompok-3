@@ -2,6 +2,19 @@ const { Users } = require("../models");
 
 class UsersRepository {
 
+
+    // ------------------------- Handle Get All Users ------------------------- //
+
+    static async handleGetAllUsers(){
+        const handleGetAllUsers = await Users.findAll();
+
+        return handleGetAllUsers;
+    }
+
+    // ------------------------- End Handle Get All Users ------------------------- //
+
+
+
     // ------------------------- Get User By Email  ------------------------- //
 
     static async getUserByEmail({ email }) {
