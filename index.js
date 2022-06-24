@@ -54,6 +54,7 @@ app.get("/v1/auth/me", middleware.authenticate, authController.handleCurrentUser
 app.get("/v1/users", usersController.handleGetAllUsers);
 app.get("/v1/users/:id", usersController.handleGetUserById);
 app.put("/v1/users/update/:id", middleware.authenticate, uploadPictureUsers.single("picture"), usersController.handleUpdateUsers);
+app.get("/v1/users/:id/products", middleware.authenticate, usersController.handleGetProductByUserId);
 
 // ------------------------- End User Behavior ------------------------- //
 
