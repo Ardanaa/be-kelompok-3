@@ -40,4 +40,22 @@ const handleLogin = async (req, res) => {
 // ------------------------- End Auth Login ------------------------- //
 
 
-module.exports = { handleRegister, handleLogin };
+// ------------------------- Auth Current User ------------------------- //
+
+const handleCurrentUser = async (req, res) => {
+    
+    const currentUser = req.user;
+
+    res.status(200).send({
+        status: true,
+        message: "Get current user success.",
+        data: {
+            user: currentUser,
+        },
+    });
+}
+
+// ------------------------- End Auth Current User ------------------------- //
+
+
+module.exports = { handleRegister, handleLogin, handleCurrentUser };
