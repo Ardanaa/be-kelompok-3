@@ -64,6 +64,40 @@ class UsersServive {
 
     // ------------------------- End Handle Update Users ------------------------- //
 
-}
+
+
+    // ------------------------- Handle Get Product By User Id ------------------------- //
+
+    static async handleGetProductByUserId({ id, isPublish, isSold }){
+        try {
+            const handleGetProductByUserId = await usersRepository.handleGetProductByUserId({
+                id,
+                isPublish,
+                isSold
+            });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "Success Get Product By User Id",
+                data: {
+                    handle_get_product_by_user_id: handleGetProductByUserId,
+                },
+            };
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    handle_get_product_by_user_id: null,
+                },
+            };
+        };
+    };
+
+    // ------------------------- End Handle Get Product By User Id ------------------------- //
+
+};
 
 module.exports = UsersServive;

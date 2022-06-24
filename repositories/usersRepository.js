@@ -1,4 +1,4 @@
-const { Users } = require("../models");
+const { Users, Products } = require("../models");
 
 class UsersRepository {
 
@@ -78,7 +78,34 @@ class UsersRepository {
     };
 
     // ------------------------- End Update User (Complete Account Info)  ------------------------- //
+
+
     
-}
+    // ------------------------- Handle Get Product By User Id ------------------------- //
+
+    static async handleGetProductByUserId({ id, isPublish, isSold }){
+        const query = {
+            where: {}
+        }
+
+        if (id) {
+            query.where = { ...query.where, user_id: id }
+        }
+
+        if (isPublish) {
+            query.where = { ...query.where, isPublish }
+        }
+
+        if (isSold) {
+            query.where = { ...query.where, isSold }
+        }
+
+        const handleGetProductByUserId = await Products.findAll(query);
+
+        return handleGetProductByUserId;
+    }
+
+    // ------------------------- End Handle Get Product By User Id ------------------------- //
+};
 
 module.exports = UsersRepository;

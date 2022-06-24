@@ -20,7 +20,7 @@ const handleGetAllUsers = async (req, res) => {
 
 // ------------------------- Handle Get User By Id ------------------------- //
 
-const handleGetUserById = async (req, res, next) => {
+const handleGetUserById = async (req, res) => {
     
     const { id } = req.params;
 
@@ -63,4 +63,29 @@ const handleUpdateUsers = async (req, res, next) => {
 
 // ------------------------- End Handle Update Users ------------------------- //
 
-module.exports = { handleUpdateUsers, handleGetAllUsers, handleGetUserById };
+
+
+// ------------------------- Handle Get Product By User Id ------------------------- //
+
+const handleGetProductByUserId = async (req, res, next) => {
+
+    const { id } = req.params;
+    const { isPublish, isSold } = req.query;
+
+    const { status, status_code, message, data } =
+        await usersService.handleGetProductByUserId({
+            id,
+            isPublish,
+            isSold,
+        });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+};
+
+// ------------------------- End Handle Get Product By User Id ------------------------- //
+
+module.exports = { handleUpdateUsers, handleGetAllUsers, handleGetUserById, handleGetProductByUserId };
