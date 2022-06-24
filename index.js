@@ -52,6 +52,7 @@ app.get("/v1/auth/me", middleware.authenticate, authController.handleCurrentUser
 // ------------------------- User Behavior (complete account info) ------------------------- //
 
 app.get("/v1/users", usersController.handleGetAllUsers);
+app.get("/v1/users/:id", usersController.handleGetUserById);
 app.put("/v1/users/update/:id", middleware.authenticate, uploadPictureUsers.single("picture"), usersController.handleUpdateUsers);
 
 // ------------------------- End User Behavior ------------------------- //
