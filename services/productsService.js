@@ -19,7 +19,7 @@ class ProductsService{
                 status_code: 200,
                 message: "Produk berhasil ditampilkan!",
                 data: {
-                    handle_get_all_product: handleGetAllProducts,
+                    get_all_product: handleGetAllProducts,
                 },
             };
         } catch (err) {
@@ -28,7 +28,7 @@ class ProductsService{
                 status_code: 500,
                 message: err.message,
                 data: {
-                    handle_get_all_product: null,
+                    get_all_product: null,
                 },
             };
         }
@@ -50,7 +50,7 @@ class ProductsService{
                 status_code: 200,
                 message: "Success get product by id.",
                 data: {
-                    get_product_by_id: getProductById,
+                    product_by_id: getProductById,
                 },
             };
             
@@ -60,7 +60,7 @@ class ProductsService{
                 status_code: 500,
                 message: err.message,
                 data: {
-                    registered_user: null,
+                    product_by_id: null,
                 },
             };
         }
@@ -93,7 +93,7 @@ class ProductsService{
                     status_code: 400,
                     message: "Name wajib diisi!",
                     data: {
-                        handle_created_product: null,
+                        created_product: null,
                     },
                 };
             }
@@ -104,7 +104,7 @@ class ProductsService{
                     status_code: 400,
                     message: "Price wajib diisi!",
                     data: {
-                        handle_created_product: null,
+                        created_product: null,
                     },
                 };
             }
@@ -115,7 +115,7 @@ class ProductsService{
                     status_code: 400,
                     message: "Category wajib diisi!",
                     data: {
-                        handle_created_product: null,
+                        created_product: null,
                     },
                 };
             }
@@ -126,7 +126,7 @@ class ProductsService{
                     status_code: 400,
                     message: "Description wajib diisi!",
                     data: {
-                        handle_created_product: null,
+                        created_product: null,
                     },
                 };
             }
@@ -137,7 +137,7 @@ class ProductsService{
                     status_code: 400,
                     message: "Picture wajib diisi!",
                     data: {
-                        handle_created_product: null,
+                        created_product: null,
                     },
                 };
             }
@@ -148,7 +148,7 @@ class ProductsService{
                     status_code: 400,
                     message: "Picture maksimal 4!",
                     data: {
-                        handle_created_product: null,
+                        created_product: null,
                     },
                 };
             }
@@ -159,7 +159,7 @@ class ProductsService{
                     code_status: 400,
                     message: "isPublish wajib diisi!",
                     data: {
-                        handle_created_product: null,
+                        created_product: null,
                     }
                 }
             };
@@ -170,7 +170,7 @@ class ProductsService{
                     code_status: 400,
                     message: "isSold wajib diisi!",
                     data: {
-                        handle_created_product: null,
+                        created_product: null,
                     }
                 }
             };
@@ -191,7 +191,7 @@ class ProductsService{
                 status_code: 201,
                 message: "Produk baru berhasil dibuat!",
                 data: {
-                    handle_created_product: handleCreatedProduct,
+                    created_product: handleCreatedProduct,
                 },
             };
         } catch (err) {
@@ -200,7 +200,7 @@ class ProductsService{
                 status_code: 500,
                 message: err.message,
                 data: {
-                    handle_created_product: null,
+                    created_product: null,
                 },
             };
         }
@@ -240,7 +240,7 @@ class ProductsService{
                     status_code: 200,
                     message: "Product updated successfully",
                     data:{
-                        updated_post: updatedProductById,
+                        updated_product: updatedProductById,
                     },
                 };
 
@@ -250,7 +250,7 @@ class ProductsService{
                     status_code: 401,
                     message: "Resource Unauthorized",
                     data:{
-                        handle_updated_product: null,
+                        updated_product: null,
                     },
                 }
             }
@@ -260,7 +260,7 @@ class ProductsService{
                 status_code: 500,
                 message: err.message,
                 data: {
-                    handle_updated_product: null,
+                    updated_product: null,
                 },
             };
         }
@@ -294,7 +294,7 @@ class ProductsService{
                     status_code: 401,
                     message: "Resource Unauthorized",
                     data:{
-                        handle_deleted_product: null,
+                        deleted_product: null,
                     },
                 }
             }
@@ -304,7 +304,7 @@ class ProductsService{
                 status_code: 500,
                 message: err.message,
                 data: {
-                    handle_deleted_product: null,
+                    deleted_product: null,
                 },
             };
         }
