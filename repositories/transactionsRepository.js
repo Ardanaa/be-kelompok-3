@@ -1,4 +1,4 @@
-const { Transactions } = require("../models");
+const { Transactions, Products } = require("../models");
 
 class TransactionRepository {
 
@@ -29,6 +29,29 @@ class TransactionRepository {
 
     // ------------------------- End Handle Create Transaction (Repository) ------------------------- //
 
+
+    // ------------------------- Handle Get Transaction By User Id (Repository) ------------------------- //
+
+    static async handleGetTransactionByUserId({ id }){
+        
+        const query = {
+            where: {},
+            include: [{
+                model: Products,
+                attributes: ["name", "category", "price", "picture"]
+            }]
+        }
+
+        if (id) {
+            query.where = { ...query.where, user_id: id }
+        }
+
+        const getTransactionByUserId = await Transactions.findAll(query);
+
+        return getTransactionByUserId;
+    }
+
+    // ------------------------- End Handle Get Transaction By User Id (Repository) ------------------------- //
 };
 
 module.exports = TransactionRepository;

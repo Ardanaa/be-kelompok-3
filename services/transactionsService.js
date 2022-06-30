@@ -51,28 +51,6 @@ class TransactionsService {
                 };
             }
 
-            // if (!isAccepted) {
-            //     return {
-            //         status: false,
-            //         status_code: 400,
-            //         message: "isAccepted wajib diisi!",
-            //         data: {
-            //             created_transaction: null,
-            //         },
-            //     };
-            // }
-
-            // if (!isRejected) {
-            //     return {
-            //         status: false,
-            //         status_code: 400,
-            //         message: "isRejected wajib diisi!",
-            //         data: {
-            //             created_transaction: null,
-            //         },
-            //     };
-            // }
-
             if (!isOpened) {
                 return {
                     status: false,
@@ -116,6 +94,37 @@ class TransactionsService {
     };
 
     // ------------------------- End Handle Create Transaction (Service) ------------------------- //
+
+
+    // ------------------------- Handle Get Transaction By User Id (Service) ------------------------- //
+
+    static async handleGetTransactionByUserId({ id }){
+        try {
+
+            const getTransactionByUserId = await transactionsRepository.handleGetTransactionByUserId({ id });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "Data transaksi berhasil didapatkan",
+                data: {
+                    get_transaction_user: getTransactionByUserId,
+                },
+            };
+
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    get_transaction_user: null,
+                },
+            };
+        }
+    }
+
+    // ------------------------- End Handle Get Transaction By User Id (Service) ------------------------- //
 
 };
 

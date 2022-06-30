@@ -27,4 +27,23 @@ const handleCreateTransaction = async (req, res, next) => {
 
 // ------------------------- End Handle Create Transaction (Controller) ------------------------- //
 
-module.exports = { handleCreateTransaction };
+
+// ------------------------- Handle Get Transaction By User Id (Controller) ------------------------- //
+
+const handleGetTransactionByUserId = async (req, res, next) => {
+
+    const { id } = req.params;
+
+    const { status, status_code, message, data } = await transactionsService.handleGetTransactionByUserId({ id });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+
+}
+
+// ------------------------- End Handle Get Transaction By User Id (Controller) ------------------------- //
+
+module.exports = { handleCreateTransaction, handleGetTransactionByUserId };
