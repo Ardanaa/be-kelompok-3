@@ -75,6 +75,7 @@ app.delete("/v1/products/delete/:id", middleware.authenticate,productsController
 // ------------------------- Transaction System ------------------------- //
 
 app.post("/v1/transactions/create", middleware.authenticate, transactionsController.handleCreateTransaction);
+app.get("/v1/transactios/user/:id", middleware.authenticate, transactionsController.handleGetTransactionByUserId);
 
 // ------------------------- End Transaction System ------------------------- //
 
