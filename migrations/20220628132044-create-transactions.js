@@ -12,7 +12,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       owner_id:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        reference: {
+          model: 'Users',
+          key: 'id',
+        }
       },
       product_id: {
         type: Sequelize.INTEGER,

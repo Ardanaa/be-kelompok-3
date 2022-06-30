@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       Transactions.belongsTo(models.Products, {
         foreignKey: 'product_id'
       });
+
+      Transactions.belongsTo(models.Users, {
+        foreignKey: 'owner_id'
+      });
     }
   }
   Transactions.init({
