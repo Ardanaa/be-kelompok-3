@@ -46,4 +46,26 @@ const handleGetTransactionByUserId = async (req, res, next) => {
 
 // ------------------------- End Handle Get Transaction By User Id (Controller) ------------------------- //
 
-module.exports = { handleCreateTransaction, handleGetTransactionByUserId };
+
+// -------------------------  Handle Get Transaction By Owner Id (Controller) ------------------------- //
+
+const handleGetTransactionByOwnerId = async (req, res, next) => {
+    const { id } = req.params;
+
+    const { status, status_code, message, data } = await transactionsService.handleGetTransactionByOwnerId({ id });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+}
+
+// ------------------------- End Handle Get Transaction By Owner Id (Controller) ------------------------- //
+
+
+module.exports = { 
+    handleCreateTransaction, 
+    handleGetTransactionByUserId,
+    handleGetTransactionByOwnerId
+};

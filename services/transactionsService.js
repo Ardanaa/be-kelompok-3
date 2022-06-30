@@ -126,6 +126,37 @@ class TransactionsService {
 
     // ------------------------- End Handle Get Transaction By User Id (Service) ------------------------- //
 
+
+
+    // ------------------------- Handle Get Transaction By Owner Id (Service) ------------------------- //
+
+    static async handleGetTransactionByOwnerId({ id }){
+        try {
+
+            const getTransactionByOwnerId = await transactionsRepository.handleGetTransactionByOwnerId({ id });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "Data transaksi berhasil didapatkan",
+                data: {
+                    get_transaction_owner: getTransactionByOwnerId,
+                },
+            };
+
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    get_transaction_owner: null,
+                },
+            };
+        }
+    }
+
+    // ------------------------- End Handle Get Transaction By Owner Id (Service) ------------------------- //
 };
 
 module.exports = TransactionsService;
