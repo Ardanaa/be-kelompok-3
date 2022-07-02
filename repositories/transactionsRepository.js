@@ -30,6 +30,19 @@ class TransactionRepository {
     // ------------------------- End Handle Create Transaction (Repository) ------------------------- //
 
 
+    // ------------------------- Handle Get Transaction By Id (Repository) ------------------------- //
+
+    static async handleGetTransactionById({ id }) {
+        const getTransactionById = await Transactions.findOne({ 
+            where: { id },
+        });
+
+        return getTransactionById;
+    };
+
+    // ------------------------- End Handle Get Transaction By Id (Repository) ------------------------- //
+
+
     // ------------------------- Handle Get Transaction By User Id (Repository) ------------------------- //
 
     static async handleGetTransactionByUserId({ id }){
@@ -40,7 +53,7 @@ class TransactionRepository {
                 model: Products,
                 attributes: ["name", "category", "price", "picture"] 
             }]
-        }
+        };
 
         if (id) {
             query.where = { ...query.where, user_id: id }
@@ -49,7 +62,7 @@ class TransactionRepository {
         const getTransactionByUserId = await Transactions.findAll(query);
 
         return getTransactionByUserId;
-    }
+    };
 
     // ------------------------- End Handle Get Transaction By User Id (Repository) ------------------------- //
 
@@ -65,7 +78,7 @@ class TransactionRepository {
                 model: Products,
                 attributes: ["name", "category", "price", "picture"] 
             }]
-        }
+        };
 
         if (id) {
             query.where = { ...query.where, owner_id: id }
@@ -74,7 +87,7 @@ class TransactionRepository {
         const getTransactionByOwnerId = await Transactions.findAll(query);
 
         return getTransactionByOwnerId;
-    }
+    };
 
     // ------------------------- End Handle Get Transaction By Owner Id (Repository) ------------------------- //
 };
