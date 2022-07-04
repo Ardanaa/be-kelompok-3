@@ -64,8 +64,38 @@ const handleGetTransactionByOwnerId = async (req, res, next) => {
 // ------------------------- End Handle Get Transaction By Owner Id (Controller) ------------------------- //
 
 
+
+// ------------------------- Handle Update Transaction By Id (Controller) ------------------------- //
+
+const handleUpdateTransactionById = async (req, res, next) => {
+
+    const { id } = req.params;
+
+    const { isAccepted, isRejected } = req.body;
+
+    const user_id = req.user.id;
+
+    const { status, status_code, message, data } = await transactionsService.handleUpdateTransactionById({ 
+        id, 
+        user_id,
+        isAccepted, 
+        isRejected 
+    });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+}
+
+
+// ------------------------- End Handle Update Transaction By Id (Controller) ------------------------- //
+
+
 module.exports = { 
     handleCreateTransaction, 
     handleGetTransactionByUserId,
-    handleGetTransactionByOwnerId
+    handleGetTransactionByOwnerId,
+    handleUpdateTransactionById
 };

@@ -157,6 +157,63 @@ class TransactionsService {
     }
 
     // ------------------------- End Handle Get Transaction By Owner Id (Service) ------------------------- //
+
+
+
+    // ------------------------- Handle Update Transaction By Id (Service) ------------------------- //
+    
+    static async handleUpdateTransactionById({
+        id, 
+        user_id,
+        isAccepted, 
+        isRejected 
+    }) {
+
+        try {
+
+            const getTransactionById = await transactionsRepository.handleGetTransactionById({ id });
+
+            if (getTransactionById.owner_id == user_id){
+                const updatedTransaction = await transactionsRepository.handleUpdateTransactionById({
+                    id, 
+                    user_id,
+                    isAccepted, 
+                    isRejected 
+                });
+
+                return {
+                    status: true,
+                    status_code: 200,
+                    message: "Transaksi berhasil diubah",
+                    data: {
+                        updated_transaction: updatedTransaction,
+                    },
+                };
+            }else{
+                return{
+                    status: false,
+                    status_code: 401,
+                    message: "Resource Unauthorized",
+                    data:{
+                        updated_transaction: null,
+                    },
+                }
+            }
+
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    updated_transaction: null,
+                },
+            };
+        }
+
+    }
+    
+    // ------------------------- End Handle Update Transaction By Id (Service) ------------------------- //
 };
 
 module.exports = TransactionsService;

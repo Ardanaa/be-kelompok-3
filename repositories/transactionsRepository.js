@@ -90,6 +90,29 @@ class TransactionRepository {
     };
 
     // ------------------------- End Handle Get Transaction By Owner Id (Repository) ------------------------- //
+
+
+    
+    // ------------------------- Handle Update Transaction By Id (Repository) ------------------------- //
+
+    static async handleUpdateTransactionById({
+        id, 
+        user_id,
+        isAccepted, 
+        isRejected 
+    }){
+
+        const updatedTransaction = await Transactions.update({
+            isAccepted, 
+            isRejected 
+        }, {
+            where: { id },
+        });
+
+        return updatedTransaction;
+    }
+
+    // ------------------------- End Handle Update Transaction By Id (Repository) ------------------------- //
 };
 
 module.exports = TransactionRepository;
