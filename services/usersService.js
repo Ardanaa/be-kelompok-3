@@ -4,8 +4,8 @@ class UsersServive {
 
     // ------------------------- Handle Get All Users ------------------------- //
 
-    static async handleGetAllUsers(){
-        
+    static async handleGetAllUsers() {
+
         const handleGetAllUsers = await usersRepository.handleGetAllUsers();
 
         return {
@@ -23,8 +23,8 @@ class UsersServive {
 
     // ------------------------- Handle Get User By Id ------------------------- //
 
-    static async handleGetUserById({ id }){
-        const handleGetUserById = await usersRepository.handleGetUserById({id});
+    static async handleGetUserById({ id }) {
+        const handleGetUserById = await usersRepository.handleGetUserById({ id });
 
         return {
             status: true,
@@ -66,9 +66,43 @@ class UsersServive {
 
 
 
+    // ------------------------- Handle Delete Users ------------------------- //
+
+    static async handleDeleteUsers({ id }) {
+
+        const handleGetUserById = await usersRepository.handleGetUserById({ id });
+
+        if (handleGetUserById.id == id) {
+
+            const deletedUsers = await usersRepository.handleDeleteUsers({ id });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "User berhasil di hapus",
+                data: {
+                    deleted_users: deletedUsers,
+                },
+            };
+        } else {
+            return {
+                status: true,
+                status_code: 401,
+                message: "Resource Unauthorized",
+                data: {
+                    deleted_users: null,
+                },
+            };
+        }
+    }
+
+    // ------------------------- End Handle Delete Users ------------------------- //
+
+
+
     // ------------------------- Handle Get Product By User Id ------------------------- //
 
-    static async handleGetProductByUserId({ id, isPublish, isSold }){
+    static async handleGetProductByUserId({ id, isPublish, isSold }) {
         try {
             const handleGetProductByUserId = await usersRepository.handleGetProductByUserId({
                 id,
