@@ -64,6 +64,24 @@ const handleUpdateUsers = async (req, res, next) => {
 // ------------------------- End Handle Update Users ------------------------- //
 
 
+// ------------------------- Handle Delete  Users ------------------------- //
+
+const handleDeleteUsers = async (req, res, next) => {
+    const { id } = req.params;
+
+    const { status, status_code, message, data } = await usersService.handleDeleteUsers({ id });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+}
+
+
+// ------------------------- End Handle Delete Users ------------------------- //
+
+
 
 // ------------------------- Handle Get Product By User Id ------------------------- //
 
@@ -88,4 +106,10 @@ const handleGetProductByUserId = async (req, res, next) => {
 
 // ------------------------- End Handle Get Product By User Id ------------------------- //
 
-module.exports = { handleUpdateUsers, handleGetAllUsers, handleGetUserById, handleGetProductByUserId };
+module.exports = { 
+    handleUpdateUsers, 
+    handleGetAllUsers, 
+    handleGetUserById, 
+    handleDeleteUsers,
+    handleGetProductByUserId 
+};

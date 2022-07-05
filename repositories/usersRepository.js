@@ -80,6 +80,18 @@ class UsersRepository {
     // ------------------------- End Update User (Complete Account Info)  ------------------------- //
 
 
+    // ------------------------- Handle Delete Users ------------------------- //
+
+    static async handleDeleteUsers({ id }) {
+        
+        const deletedUsers = await Users.destroy({ where: { id } });
+
+        return deletedUsers;
+    }
+
+    // ------------------------- End Handle Delete Users ------------------------- //
+
+
     
     // ------------------------- Handle Get Product By User Id ------------------------- //
 
