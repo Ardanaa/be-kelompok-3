@@ -28,6 +28,7 @@ const usersController = require("./controllers/usersController");
 
 const productsController = require("./controllers/productsController");
 
+const transactionsController = require("./controllers/transactionsController");
 // ------------------------- End Import Controllers ------------------------- //
 
 
@@ -69,6 +70,16 @@ app.put("/v1/products/update/:id", middleware.authenticate,uploadPictureProducts
 app.delete("/v1/products/delete/:id", middleware.authenticate,productsController.handleDeleteProductById);
 
 // ------------------------- End Product System ------------------------- //
+
+
+// ------------------------- Transaction System ------------------------- //
+
+app.post("/v1/transactions/create", middleware.authenticate, transactionsController.handleCreateTransaction);
+app.get("/v1/transactios/user/:id", middleware.authenticate, transactionsController.handleGetTransactionByUserId);
+app.get("/v1/transactios/owner/:id", middleware.authenticate, transactionsController.handleGetTransactionByOwnerId);
+app.put("/v1/transaction/update/:id", middleware.authenticate, transactionsController.handleUpdateTransactionById);
+
+// ------------------------- End Transaction System ------------------------- //
 
 app.listen(PORT, () => {
     console.log(`Server berhasil berjalan di port http://localhost:${PORT}`);

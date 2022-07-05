@@ -13,7 +13,7 @@ class UsersServive {
             status_code: 200,
             message: "Berhasil mendapatkan semua data users",
             data: {
-                handle_get_all_users: handleGetAllUsers,
+                get_all_users: handleGetAllUsers,
             },
         };
     };
@@ -31,7 +31,7 @@ class UsersServive {
             status_code: 200,
             message: "Berhasil mendapatkan data user berdasarkan id",
             data: {
-                handle_get_user_by_id: handleGetUserById,
+                user_by_id: handleGetUserById,
             },
         };
     };
@@ -81,7 +81,7 @@ class UsersServive {
                 status_code: 200,
                 message: "Success Get Product By User Id",
                 data: {
-                    handle_get_product_by_user_id: handleGetProductByUserId,
+                    product_user_id: handleGetProductByUserId,
                 },
             };
         } catch (err) {
@@ -90,7 +90,7 @@ class UsersServive {
                 status_code: 500,
                 message: err.message,
                 data: {
-                    handle_get_product_by_user_id: null,
+                    product_user_id: null,
                 },
             };
         };
