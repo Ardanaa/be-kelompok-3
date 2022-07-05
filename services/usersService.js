@@ -4,8 +4,8 @@ class UsersServive {
 
     // ------------------------- Handle Get All Users ------------------------- //
 
-    static async handleGetAllUsers(){
-        
+    static async handleGetAllUsers() {
+
         const handleGetAllUsers = await usersRepository.handleGetAllUsers();
 
         return {
@@ -13,7 +13,7 @@ class UsersServive {
             status_code: 200,
             message: "Berhasil mendapatkan semua data users",
             data: {
-                handle_get_all_users: handleGetAllUsers,
+                get_all_users: handleGetAllUsers,
             },
         };
     };
@@ -23,15 +23,15 @@ class UsersServive {
 
     // ------------------------- Handle Get User By Id ------------------------- //
 
-    static async handleGetUserById({ id }){
-        const handleGetUserById = await usersRepository.handleGetUserById({id});
+    static async handleGetUserById({ id }) {
+        const handleGetUserById = await usersRepository.handleGetUserById({ id });
 
         return {
             status: true,
             status_code: 200,
             message: "Berhasil mendapatkan data user berdasarkan id",
             data: {
-                handle_get_user_by_id: handleGetUserById,
+                user_by_id: handleGetUserById,
             },
         };
     };
@@ -66,9 +66,43 @@ class UsersServive {
 
 
 
+    // ------------------------- Handle Delete Users ------------------------- //
+
+    static async handleDeleteUsers({ id }) {
+
+        const handleGetUserById = await usersRepository.handleGetUserById({ id });
+
+        if (handleGetUserById.id == id) {
+
+            const deletedUsers = await usersRepository.handleDeleteUsers({ id });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "User berhasil di hapus",
+                data: {
+                    deleted_users: deletedUsers,
+                },
+            };
+        } else {
+            return {
+                status: true,
+                status_code: 401,
+                message: "Resource Unauthorized",
+                data: {
+                    deleted_users: null,
+                },
+            };
+        }
+    }
+
+    // ------------------------- End Handle Delete Users ------------------------- //
+
+
+
     // ------------------------- Handle Get Product By User Id ------------------------- //
 
-    static async handleGetProductByUserId({ id, isPublish, isSold }){
+    static async handleGetProductByUserId({ id, isPublish, isSold }) {
         try {
             const handleGetProductByUserId = await usersRepository.handleGetProductByUserId({
                 id,
@@ -81,7 +115,7 @@ class UsersServive {
                 status_code: 200,
                 message: "Success Get Product By User Id",
                 data: {
-                    handle_get_product_by_user_id: handleGetProductByUserId,
+                    product_user_id: handleGetProductByUserId,
                 },
             };
         } catch (err) {
@@ -90,7 +124,7 @@ class UsersServive {
                 status_code: 500,
                 message: err.message,
                 data: {
-                    handle_get_product_by_user_id: null,
+                    product_user_id: null,
                 },
             };
         };
