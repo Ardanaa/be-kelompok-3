@@ -44,7 +44,6 @@ const handleGetProductById = async (req, res, next) => {
 
 
 
-
 // ------------------------- Handle Create Product (Controller) ------------------------- //
 
 const handleCreateProduct = async (req, res, next) => {
@@ -137,4 +136,5 @@ module.exports = {
     handleGetAllProducts, 
     handleGetProductById, 
     handleUpdateProductById, 
-    handleDeleteProductById };
+    handleDeleteProductById
+};

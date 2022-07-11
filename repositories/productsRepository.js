@@ -1,4 +1,4 @@
-const { Products } = require("../models");
+const { Products, Users } = require("../models");
 const { Op } = require("sequelize");
 
 class ProductsRepository {
@@ -24,15 +24,15 @@ class ProductsRepository {
             return searchByName;
         }
 
-        if (category){
+        if (category) {
             query.where = { ...query.where, category };
         }
 
-        if (isPublish){
+        if (isPublish) {
             query.where = { ...query.where, isPublish };
         }
 
-        if (isSold){
+        if (isSold) {
             query.where = { ...query.where, isSold };
         }
 
@@ -48,8 +48,9 @@ class ProductsRepository {
     // ------------------------- Handle Get Product By Id (Repository) ------------------------- //
 
     static async handleGetProductById({ id }) {
+
         const getProductById = await Products.findOne({
-            where: { id },
+            where: { id }
         });
 
         return getProductById;
@@ -119,7 +120,6 @@ class ProductsRepository {
     }
 
     // ------------------------- End Handle Delete Product (Repository) ------------------------- //
-
 
 };
 

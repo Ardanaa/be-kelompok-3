@@ -97,19 +97,15 @@ class UsersRepository {
 
     static async handleGetProductByUserId({ id, isPublish, isSold }){
         const query = {
-            where: {}
-        }
+            where: {},
+            include: [{
+                model: Users,
+                attributes: ["name", "city", "picture"]
+            }]
+        };
 
         if (id) {
-            query.where = { ...query.where, user_id: id }
-        }
-
-        if (isPublish) {
-            query.where = { ...query.where, isPublish }
-        }
-
-        if (isSold) {
-            query.where = { ...query.where, isSold }
+            query.where = { ...query.where, id: id }
         }
 
         const handleGetProductByUserId = await Products.findAll(query);
