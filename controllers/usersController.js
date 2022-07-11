@@ -88,14 +88,9 @@ const handleDeleteUsers = async (req, res, next) => {
 const handleGetProductByUserId = async (req, res, next) => {
 
     const { id } = req.params;
-    const { isPublish, isSold } = req.query;
 
     const { status, status_code, message, data } =
-        await usersService.handleGetProductByUserId({
-            id,
-            isPublish,
-            isSold,
-        });
+        await usersService.handleGetProductByUserId({ id });
 
     res.status(status_code).send({
         status: status,
