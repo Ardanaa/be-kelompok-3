@@ -43,23 +43,41 @@ class UsersServive {
 
     static async handleUpdateUsers({ id, name, city, address, phoneNumber, picture }) {
 
-        const updatedUser = await usersRepository.handleUpdateUsers({
-            id,
-            name,
-            city,
-            address,
-            phoneNumber,
-            picture
-        });
+        const getUserById = await usersRepository.handleGetUserById({ id });
 
-        return {
-            status: true,
-            status_code: 200,
-            message: "User berhasil melengkapi info akun!",
-            data: {
-                updated_user: updatedUser,
-            },
-        };
+        if (getUserById.id == id ) {
+
+            const fileBase64 = picture.buffer.toString("base64");
+            const file = `data:${picture.mimetype};base64,${fileBase64}`;
+            const cloudinaryPicture = await cloudinar.uploader.upload(file);
+
+            const updatedUser = await usersRepository.handleUpdateUsers({
+                id,
+                name,
+                city,
+                address,
+                phoneNumber,
+                picture: cloudinaryPicture.url
+            });
+    
+            return {
+                status: true,
+                status_code: 200,
+                message: "User berhasil melengkapi info akun!",
+                data: {
+                    updated_user: updatedUser,
+                },
+            };
+        } else {
+            return {
+                status: false,
+                status_code: 401,
+                message: "Resource Unauthorized",
+                data: {
+                    updated_user: null,
+                },
+            };
+        }
     };
 
     // ------------------------- End Handle Update Users ------------------------- //

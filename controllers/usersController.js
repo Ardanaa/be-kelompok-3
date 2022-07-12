@@ -50,7 +50,7 @@ const handleUpdateUsers = async (req, res, next) => {
         city,
         address,
         phoneNumber,
-        picture: req.uploaded_picture,
+        picture: req.file,
     });
 
     res.status(status_code).send({
