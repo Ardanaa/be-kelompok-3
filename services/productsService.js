@@ -153,7 +153,7 @@ class ProductsService {
                 };
             }
 
-            if (isPublish === null) {
+            if (!isPublish) {
                 return {
                     status: false,
                     code_status: 400,
@@ -164,7 +164,7 @@ class ProductsService {
                 }
             };
 
-            if (isSold === null) {
+            if (!isSold) {
                 return {
                     status: false,
                     code_status: 400,
@@ -219,7 +219,9 @@ class ProductsService {
         category,
         description,
         picture,
-        isPublish }) {
+        isPublish,
+        isSold
+    }) {
 
         try {
             const getProductById = await productsRepository.handleGetProductById({ id });
@@ -233,6 +235,7 @@ class ProductsService {
                     description,
                     picture,
                     isPublish,
+                    isSold
                 });
 
                 return {

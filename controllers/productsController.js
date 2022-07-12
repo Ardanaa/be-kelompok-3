@@ -83,7 +83,7 @@ const handleCreateProduct = async (req, res, next) => {
 // ------------------------- Handle Update Product (Controller) ------------------------- //
 
 const handleUpdateProductById = async (req,res, next) => {
-    const {name, price, category, description, isPublish} = req.body;
+    const {name, price, category, description, isPublish, isSold} = req.body;
     const {id} = req.params;
 
     const user_id = req.user.id;
@@ -97,6 +97,7 @@ const handleUpdateProductById = async (req,res, next) => {
         description,
         picture: req.uploaded_picture,
         isPublish,
+        isSold
     });
 
     res.status(status_code).send({

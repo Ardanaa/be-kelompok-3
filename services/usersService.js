@@ -102,9 +102,9 @@ class UsersServive {
 
     // ------------------------- Handle Get Product By User Id ------------------------- //
 
-    static async handleGetProductByUserId({ id }) {
+    static async handleGetProductByUserId({ id, isSold }) {
         try {
-            const handleGetProductByUserId = await usersRepository.handleGetProductByUserId({ id });
+            const handleGetProductByUserId = await usersRepository.handleGetProductByUserId({ id, isSold });
 
             return {
                 status: true,

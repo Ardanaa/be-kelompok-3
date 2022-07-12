@@ -49,9 +49,19 @@ class ProductsRepository {
 
     static async handleGetProductById({ id }) {
 
-        const getProductById = await Products.findOne({
-            where: { id }
-        });
+        const query = {
+            where: {},
+            include: [{
+                model: Users,
+                attributes: ["name", "city", "picture"]
+            }],
+        }
+
+        if (id) {
+            query.where = { ...query.where, id: id }
+        }
+
+        const getProductById = await Products.findOne(query);
 
         return getProductById;
     }
@@ -93,7 +103,7 @@ class ProductsRepository {
 
     // ------------------------- Handle Update Product (Repository) ------------------------- //
 
-    static async handleUpdateProductById({ id, name, price, category, description, picture, isPublish }) {
+    static async handleUpdateProductById({ id, name, price, category, description, picture, isPublish, isSold }) {
         const handleUpdatedProductById = await Products.update({
             name,
             price,
@@ -101,6 +111,7 @@ class ProductsRepository {
             description,
             picture,
             isPublish,
+            isSold,
         },
             { where: { id } }
         );

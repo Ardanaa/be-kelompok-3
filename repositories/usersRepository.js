@@ -95,23 +95,23 @@ class UsersRepository {
     
     // ------------------------- Handle Get Product By User Id ------------------------- //
 
-    static async handleGetProductByUserId({ id }){
+    static async handleGetProductByUserId({ id, isSold }){
 
         const query = {
-            where: {},
-            include: [{
-                model: Users,
-                attributes: ["name", "city", "picture"]
-            }],
+            where: {}
         }
 
         if (id) {
             query.where = { ...query.where, user_id: id }
         }
 
-        const getProductByUserId = await Products.findAll(query);
+        if (isSold) {
+            query.where = { ...query.where, isSold }
+        }
 
-        return getProductByUserId;
+        const handleGetProductByUserId = await Products.findAll(query);
+
+        return handleGetProductByUserId;
     }
 
     // ------------------------- End Handle Get Product By User Id ------------------------- //

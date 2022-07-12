@@ -89,8 +89,10 @@ const handleGetProductByUserId = async (req, res, next) => {
 
     const { id } = req.params;
 
+    const { isSold } = req.query;
+
     const { status, status_code, message, data } =
-        await usersService.handleGetProductByUserId({ id });
+        await usersService.handleGetProductByUserId({ id, isSold });
 
     res.status(status_code).send({
         status: status,
