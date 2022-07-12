@@ -67,8 +67,8 @@ app.get("/v1/users/:id/products", middleware.authenticate, usersController.handl
 app.get("/v1/products/search", productsController.handleGetAllProducts);
 app.post("/v1/products/create", middleware.authenticate, uploadPictureProducts.fields([{name: "picture"}]), productsController.handleCreateProduct);
 app.get("/v1/products/:id", middleware.authenticate, productsController.handleGetProductById);
-app.put("/v1/products/update/:id", middleware.authenticate,uploadPictureProducts.fields([{name: "picture"}]), productsController.handleUpdateProductById);
-app.delete("/v1/products/delete/:id", middleware.authenticate,productsController.handleDeleteProductById);
+app.put("/v1/products/update/:id", middleware.authenticate, uploadPictureProducts.fields([{name: "picture"}]), productsController.handleUpdateProductById);
+app.delete("/v1/products/delete/:id", middleware.authenticate, productsController.handleDeleteProductById);
 
 // ------------------------- End Product System ------------------------- //
 

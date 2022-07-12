@@ -95,17 +95,14 @@ class UsersRepository {
     
     // ------------------------- Handle Get Product By User Id ------------------------- //
 
-    static async handleGetProductByUserId({ id, isPublish, isSold }){
+    static async handleGetProductByUserId({ id, isSold }){
+
         const query = {
             where: {}
         }
 
         if (id) {
             query.where = { ...query.where, user_id: id }
-        }
-
-        if (isPublish) {
-            query.where = { ...query.where, isPublish }
         }
 
         if (isSold) {

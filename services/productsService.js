@@ -1,16 +1,16 @@
 const productsRepository = require("../repositories/productsRepository");
 
-class ProductsService{
+class ProductsService {
 
     // ------------------------- Handle Get All Product (Service) ------------------------- //
 
-    static async handleGetAllProducts({ name, category, isPublish, isSold }){
-        
+    static async handleGetAllProducts({ name, category, isPublish, isSold }) {
+
         try {
             const handleGetAllProducts = await productsRepository.handleGetAllProducts({
-                name, 
-                category, 
-                isPublish, 
+                name,
+                category,
+                isPublish,
                 isSold
             });
 
@@ -41,7 +41,7 @@ class ProductsService{
     // ------------------------- Handle Get Product By Id (Service) ------------------------- //
 
     static async handleGetProductById({ id }) {
-        
+
         try {
             const getProductById = await productsRepository.handleGetProductById({ id });
 
@@ -53,7 +53,7 @@ class ProductsService{
                     product_by_id: getProductById,
                 },
             };
-            
+
         } catch (err) {
             return {
                 status: false,
@@ -67,22 +67,22 @@ class ProductsService{
     }
 
     // ------------------------- End Handle Get Product By Id (Service) ------------------------- //
-    
-    
+
+
 
 
     // ------------------------- Handle Create Product (Service) ------------------------- //
 
-    static async handleCreateProduct({ 
-        user_id, 
-        name, 
-        price, 
-        category, 
-        description, 
-        picture, 
+    static async handleCreateProduct({
+        user_id,
+        name,
+        price,
+        category,
+        description,
+        picture,
         isPublish,
         isSold }) {
-        
+
         try {
 
             // ------------------------- Payload Validation ------------------------- //
@@ -97,7 +97,7 @@ class ProductsService{
                     },
                 };
             }
-    
+
             if (!price) {
                 return {
                     status: false,
@@ -108,7 +108,7 @@ class ProductsService{
                     },
                 };
             }
-    
+
             if (!category) {
                 return {
                     status: false,
@@ -119,7 +119,7 @@ class ProductsService{
                     },
                 };
             }
-    
+
             if (!description) {
                 return {
                     status: false,
@@ -130,7 +130,7 @@ class ProductsService{
                     },
                 };
             }
-    
+
             if (!picture.length) {
                 return {
                     status: false,
@@ -141,7 +141,7 @@ class ProductsService{
                     },
                 };
             }
-    
+
             if (picture.length >= 5) {
                 return {
                     status: false,
@@ -152,8 +152,8 @@ class ProductsService{
                     },
                 };
             }
-    
-            if (isPublish === null) {
+
+            if (!isPublish) {
                 return {
                     status: false,
                     code_status: 400,
@@ -164,7 +164,7 @@ class ProductsService{
                 }
             };
 
-            if (isSold === null) {
+            if (!isSold) {
                 return {
                     status: false,
                     code_status: 400,
@@ -174,7 +174,7 @@ class ProductsService{
                     }
                 }
             };
-    
+
             const handleCreatedProduct = await productsRepository.handleCreateProduct({
                 user_id,
                 name,
@@ -185,7 +185,7 @@ class ProductsService{
                 isPublish,
                 isSold
             });
-    
+
             return {
                 status: true,
                 status_code: 201,
@@ -211,20 +211,22 @@ class ProductsService{
 
     // ------------------------- Handle Update Product (Service) ------------------------- //
 
-    static async handleUpdateProductById ({ 
-        id, 
-        user_id, 
-        name, 
-        price, 
-        category, 
-        description, 
+    static async handleUpdateProductById({
+        id,
+        user_id,
+        name,
+        price,
+        category,
+        description,
         picture,
-        isPublish}) {
+        isPublish,
+        isSold
+    }) {
 
         try {
             const getProductById = await productsRepository.handleGetProductById({ id });
-    
-            if(getProductById.user_id == user_id){ 
+
+            if (getProductById.user_id == user_id) {
                 const updatedProductById = await productsRepository.handleUpdateProductById({
                     id,
                     name,
@@ -233,28 +235,29 @@ class ProductsService{
                     description,
                     picture,
                     isPublish,
+                    isSold
                 });
-        
-                return{
+
+                return {
                     status: true,
                     status_code: 200,
                     message: "Product updated successfully",
-                    data:{
+                    data: {
                         updated_product: updatedProductById,
                     },
                 };
 
-            }else{
-                return{
+            } else {
+                return {
                     status: false,
                     status_code: 401,
                     message: "Resource Unauthorized",
-                    data:{
+                    data: {
                         updated_product: null,
                     },
                 }
             }
-        }catch (err) {
+        } catch (err) {
             return {
                 status: false,
                 status_code: 500,
@@ -264,36 +267,36 @@ class ProductsService{
                 },
             };
         }
-        }
+    }
 
     // ------------------------- End Handle Update Product (Service) ------------------------- //
 
 
     // ------------------------- Handle Delete Product (Service) ------------------------- //
 
-    static async handleDeleteProductById ({ id, user_id}) {
-        try{
+    static async handleDeleteProductById({ id, user_id }) {
+        try {
             const getProductById = await productsRepository.handleGetProductById({ id });
-    
-            if(getProductById.user_id == user_id){ 
+
+            if (getProductById.user_id == user_id) {
                 const deletedProductById = await productsRepository.handleDeleteProductById({
                     id,
                 });
-        
-                return{
+
+                return {
                     status: true,
                     status_code: 200,
                     message: "Product deleted successfully",
-                    data:{
+                    data: {
                         deleted_product: deletedProductById,
                     },
                 };
-            }else{
-                return{
+            } else {
+                return {
                     status: false,
                     status_code: 401,
                     message: "Resource Unauthorized",
-                    data:{
+                    data: {
                         deleted_product: null,
                     },
                 }
@@ -311,7 +314,7 @@ class ProductsService{
     }
 
     // ------------------------- End Handle Delete Product (Service) ------------------------- //
-        
+
 };
 
 module.exports = ProductsService;

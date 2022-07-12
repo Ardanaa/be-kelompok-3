@@ -156,7 +156,7 @@ class AuthService {
             // 3. Kasih response berhasil login
             return{
                 status: true,
-                status_code: 200,
+                status_code: 201,
                 message: "User berhasil login",
                 data: {
                     token,
