@@ -1,5 +1,5 @@
 const usersRepository = require("../repositories/usersRepository");
-
+const cloudinary = require("../cloudinary/cloudinary");
 class UsersServive {
 
     // ------------------------- Handle Get All Users ------------------------- //
@@ -49,7 +49,7 @@ class UsersServive {
 
             const fileBase64 = picture.buffer.toString("base64");
             const file = `data:${picture.mimetype};base64,${fileBase64}`;
-            const cloudinaryPicture = await cloudinar.uploader.upload(file);
+            const cloudinaryPicture = await cloudinary.uploader.upload(file);
 
             const updatedUser = await usersRepository.handleUpdateUsers({
                 id,
