@@ -1,21 +1,5 @@
 const multer = require("multer");
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "./storages/");
-    },
-    filename: (req, file, cb) => {
-        const [prefix] = file.mimetype.split("/");
-        const filename = file.originalname.split(".");
-        const extension = filename.pop();
-        const fileName = `${prefix}-${Date.now()}.${extension}`;
+const storage = multer.memoryStorage();
 
-        cb(null, fileName);
-
-        if (!req[`uploaded_${file.fieldname}`])
-            req[`uploaded_${file.fieldname}`] = [];
-            req[`uploaded_${file.fieldname}`].push(fileName);
-    },
-});
-
-module.exports = multer({ storage });
+module.exports = multer({ storage: storage });
