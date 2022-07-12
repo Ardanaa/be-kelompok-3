@@ -232,7 +232,7 @@ class ProductsService {
                     const fileBase64 = pct.buffer.toString("base64");
                     const file = `data:${pct.mimetype};base64,${fileBase64}`;
                     const cloudinaryPicture = await cloudinary.uploader.upload(file);
-                    picture.push(cloudinaryPicture.url);
+                    pictures.push(cloudinaryPicture.url);
                 }));
 
                 const updatedProductById = await productsRepository.handleUpdateProductById({
