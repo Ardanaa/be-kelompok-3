@@ -65,7 +65,7 @@ const handleCreateProduct = async (req, res, next) => {
         price,
         category,
         description,
-        picture: req.uploaded_picture,
+        picture: req.files,
         isPublish,
         isSold
     });
@@ -95,7 +95,7 @@ const handleUpdateProductById = async (req,res, next) => {
         price,
         category,
         description,
-        picture: req.uploaded_picture,
+        picture: req.files,
         isPublish,
         isSold
     });

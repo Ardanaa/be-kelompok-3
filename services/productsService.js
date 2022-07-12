@@ -1,5 +1,5 @@
 const productsRepository = require("../repositories/productsRepository");
-
+const cloudinary = require("../cloudinary/cloudinary");
 class ProductsService {
 
     // ------------------------- Handle Get All Product (Service) ------------------------- //
@@ -131,28 +131,6 @@ class ProductsService {
                 };
             }
 
-            if (!picture.length) {
-                return {
-                    status: false,
-                    status_code: 400,
-                    message: "Picture wajib diisi!",
-                    data: {
-                        created_product: null,
-                    },
-                };
-            }
-
-            if (picture.length >= 5) {
-                return {
-                    status: false,
-                    status_code: 400,
-                    message: "Picture maksimal 4!",
-                    data: {
-                        created_product: null,
-                    },
-                };
-            }
-
             if (!isPublish) {
                 return {
                     status: false,
@@ -175,13 +153,33 @@ class ProductsService {
                 }
             };
 
+            if (!picture) {
+                return {
+                    status: false,
+                    status_code: 400,
+                    message: "Picture wajib diisi!",
+                    data: {
+                        created_product: null,
+                    },
+                };
+            }
+
+            const pictures = [];
+
+            await Promise.all(picture.picture.map(async (pct) => {
+                const fileBase64 = pct.buffer.toString("base64");
+                const file = `data:${pct.mimetype};base64,${fileBase64}`;
+                const cloudinaryPicture = await cloudinary.uploader.upload(file);
+                pictures.push(cloudinaryPicture.url);
+            }));
+
             const handleCreatedProduct = await productsRepository.handleCreateProduct({
                 user_id,
                 name,
                 price,
                 category,
                 description,
-                picture,
+                picture: pictures,
                 isPublish,
                 isSold
             });
@@ -227,13 +225,23 @@ class ProductsService {
             const getProductById = await productsRepository.handleGetProductById({ id });
 
             if (getProductById.user_id == user_id) {
+
+                const pictures = [];
+
+                await Promise.all(picture.picture.map(async (pct) => {
+                    const fileBase64 = pct.buffer.toString("base64");
+                    const file = `data:${pct.mimetype};base64,${fileBase64}`;
+                    const cloudinaryPicture = await cloudinary.uploader.upload(file);
+                    pictures.push(cloudinaryPicture.url);
+                }));
+
                 const updatedProductById = await productsRepository.handleUpdateProductById({
                     id,
                     name,
                     price,
                     category,
                     description,
-                    picture,
+                    picture: pictures,
                     isPublish,
                     isSold
                 });

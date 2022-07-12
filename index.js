@@ -2,8 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
-const uploadPictureProducts = require("./utils/fileUpload");
-const uploadPictureUsers = require("./utils/fileUploadUsers");
+const uploadPicture = require("./utils/fileUpload");
 
 const app = express();
 const PORT = 2000;
@@ -54,7 +53,7 @@ app.get("/v1/auth/me", middleware.authenticate, authController.handleCurrentUser
 
 app.get("/v1/users", usersController.handleGetAllUsers);
 app.get("/v1/users/:id", usersController.handleGetUserById);
-app.put("/v1/users/update/:id", middleware.authenticate, uploadPictureUsers.single("picture"), usersController.handleUpdateUsers);
+app.put("/v1/users/update/:id", middleware.authenticate, uploadPicture.single("picture"), usersController.handleUpdateUsers);
 app.put("/v1/users/delete/:id", middleware.authenticate, usersController.handleDeleteUsers);
 app.get("/v1/users/:id/products", middleware.authenticate, usersController.handleGetProductByUserId);
 
@@ -65,9 +64,9 @@ app.get("/v1/users/:id/products", middleware.authenticate, usersController.handl
 // ------------------------- Product System ------------------------- //
 
 app.get("/v1/products/search", productsController.handleGetAllProducts);
-app.post("/v1/products/create", middleware.authenticate, uploadPictureProducts.fields([{name: "picture"}]), productsController.handleCreateProduct);
+app.post("/v1/products/create", middleware.authenticate, uploadPicture.fields([{name: "picture"}]), productsController.handleCreateProduct);
 app.get("/v1/products/:id", middleware.authenticate, productsController.handleGetProductById);
-app.put("/v1/products/update/:id", middleware.authenticate, uploadPictureProducts.fields([{name: "picture"}]), productsController.handleUpdateProductById);
+app.put("/v1/products/update/:id", middleware.authenticate, uploadPicture.fields([{name: "picture"}]), productsController.handleUpdateProductById);
 app.delete("/v1/products/delete/:id", middleware.authenticate, productsController.handleDeleteProductById);
 
 // ------------------------- End Product System ------------------------- //
