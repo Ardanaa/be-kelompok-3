@@ -226,14 +226,42 @@ class ProductsService {
 
             if (getProductById.user_id == user_id) {
 
-                const pictures = [];
+                let pictures = []; 
 
-                await Promise.all(picture.picture.map(async (pct) => {
-                    const fileBase64 = pct.buffer.toString("base64");
-                    const file = `data:${pct.mimetype};base64,${fileBase64}`;
-                    const cloudinaryPicture = await cloudinary.uploader.upload(file);
-                    pictures.push(cloudinaryPicture.url);
-                }));
+                if (picture.picture){
+                    await Promise.all(picture.picture.map( async (pct) => {
+                        const fileBase64 = pct.buffer.toString("base64");
+                        const file = `data:${pct.mimetype};base64,${fileBase64}`;
+                        const cloudinaryPicture = await cloudinary.uploader.upload(file);
+                        pictures.push(cloudinaryPicture.url);
+                    }));
+                } else {
+                    pictures = getProductById.picture;
+                }
+                
+                if (!name){
+                    name = getProductById.name;
+                }
+
+                if (!price){
+                    price = getProductById.price;
+                }
+
+                if (!category){
+                    category = getProductById.category;
+                }
+
+                if (!description){
+                    description = getProductById.description;
+                }
+
+                if (!isPublish){
+                    isPublish = getProductById.isPublish;
+                }
+
+                if (!isSold){
+                    isSold = getProductById.isSold;
+                }
 
                 const updatedProductById = await productsRepository.handleUpdateProductById({
                     id,
