@@ -53,7 +53,7 @@ class ProductsRepository {
             where: {},
             include: [{
                 model: Users,
-                attributes: ["name", "city", "picture"]
+                attributes: ["id", "name", "city", "picture"]
             }],
         }
 

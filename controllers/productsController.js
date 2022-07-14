@@ -84,6 +84,7 @@ const handleCreateProduct = async (req, res, next) => {
 
 const handleUpdateProductById = async (req,res, next) => {
     const {name, price, category, description, isPublish, isSold} = req.body;
+    
     const {id} = req.params;
 
     const user_id = req.user.id;

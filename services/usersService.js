@@ -47,9 +47,17 @@ class UsersServive {
 
         if (getUserById.id == id ) {
 
-            const fileBase64 = picture.buffer.toString("base64");
-            const file = `data:${picture.mimetype};base64,${fileBase64}`;
-            const cloudinaryPicture = await cloudinary.uploader.upload(file);
+            let pictures = "";
+
+            if (picture) {
+                const fileBase64 = picture.buffer.toString("base64");
+                const file = `data:${picture.mimetype};base64,${fileBase64}`;
+                const cloudinaryPicture = await cloudinary.uploader.upload(file);
+                pictures = cloudinaryPicture.url;
+            } else {
+                pictures = getUserById.picture;
+            }
+            
 
             const updatedUser = await usersRepository.handleUpdateUsers({
                 id,
@@ -57,7 +65,7 @@ class UsersServive {
                 city,
                 address,
                 phoneNumber,
-                picture: cloudinaryPicture.url
+                picture: pictures
             });
     
             return {
