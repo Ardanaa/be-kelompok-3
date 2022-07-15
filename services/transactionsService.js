@@ -166,7 +166,8 @@ class TransactionsService {
         id, 
         user_id,
         isAccepted, 
-        isRejected 
+        isRejected,
+        isOpened 
     }) {
 
         try {
@@ -178,7 +179,8 @@ class TransactionsService {
                     id, 
                     user_id,
                     isAccepted, 
-                    isRejected 
+                    isRejected,
+                    isOpened 
                 });
 
                 return {

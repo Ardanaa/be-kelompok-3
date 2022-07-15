@@ -71,7 +71,7 @@ const handleUpdateTransactionById = async (req, res, next) => {
 
     const { id } = req.params;
 
-    const { isAccepted, isRejected } = req.body;
+    const { isAccepted, isRejected, isOpened } = req.body;
 
     const user_id = req.user.id;
 
@@ -79,7 +79,8 @@ const handleUpdateTransactionById = async (req, res, next) => {
         id, 
         user_id,
         isAccepted, 
-        isRejected 
+        isRejected,
+        isOpened 
     });
 
     res.status(status_code).send({

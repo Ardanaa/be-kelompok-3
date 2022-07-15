@@ -102,12 +102,14 @@ class TransactionRepository {
         id, 
         user_id,
         isAccepted, 
-        isRejected 
+        isRejected ,
+        isOpened
     }){
 
         const updatedTransaction = await Transactions.update({
             isAccepted, 
-            isRejected 
+            isRejected,
+            isOpened 
         }, {
             where: { id },
         });
