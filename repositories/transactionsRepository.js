@@ -1,4 +1,4 @@
-const { Transactions, Products } = require("../models");
+const { Transactions, Products, Users } = require("../models");
 
 class TransactionRepository {
 
@@ -77,6 +77,9 @@ class TransactionRepository {
             include: [{
                 model: Products,
                 attributes: ["name", "category", "price", "picture"] 
+            },{
+                model: Users,
+                attributes: ["name", "city", "picture"]
             }]
         };
 
