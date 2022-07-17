@@ -33,11 +33,25 @@ class TransactionRepository {
     // ------------------------- Handle Get Transaction By Id (Repository) ------------------------- //
 
     static async handleGetTransactionById({ id }) {
-        const getTransactionById = await Transactions.findOne({ 
-            where: { id },
-        });
+        
+        const query = {
+            where: {},
+            include: [{
+                model: Products,
+                attributes: ["name", "category", "price", "picture"] 
+            },{
+                model: Users,
+                attributes: ["name", "city", "picture"]
+            }]
+        };
 
-        return getTransactionById;
+        if (id) {
+            query.where = { ...query.where, id }
+        }
+
+        const getTransactionByOwnerId = await Transactions.findAll(query);
+
+        return getTransactionByOwnerId;
     };
 
     // ------------------------- End Handle Get Transaction By Id (Repository) ------------------------- //
@@ -70,7 +84,7 @@ class TransactionRepository {
 
     // ------------------------- Handle Get Transaction By Owner Id (Repository) ------------------------- //
 
-    static async handleGetTransactionByOwnerId({ id }){
+    static async handleGetTransactionByOwnerId({ id, isAccepted }){
         
         const query = {
             where: {},
@@ -85,6 +99,10 @@ class TransactionRepository {
 
         if (id) {
             query.where = { ...query.where, owner_id: id }
+        }
+
+        if (isAccepted) {
+            query.where = { ...query.where, isAccepted }
         }
 
         const getTransactionByOwnerId = await Transactions.findAll(query);

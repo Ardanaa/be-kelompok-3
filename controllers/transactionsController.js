@@ -1,5 +1,22 @@
 const transactionsService = require("../services/transactionsService");
 
+// ------------------------- Handle Get Transaction By Id (Controller) ------------------------- //
+
+const handleGetTransactionById = async (req, res, next) => {
+    const { id } = req.params;
+
+    const { status, status_code, message, data } = await transactionsService.handleGetTransactionById({ id });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+}
+
+// ------------------------- End Handle Get Transaction By Id (Controller) ------------------------- //
+
+
 // ------------------------- Handle Create Transaction (Controller) ------------------------- //
 
 const handleCreateTransaction = async (req, res, next) => {
@@ -52,7 +69,9 @@ const handleGetTransactionByUserId = async (req, res, next) => {
 const handleGetTransactionByOwnerId = async (req, res, next) => {
     const { id } = req.params;
 
-    const { status, status_code, message, data } = await transactionsService.handleGetTransactionByOwnerId({ id });
+    const { isAccepted } = req.query;
+
+    const { status, status_code, message, data } = await transactionsService.handleGetTransactionByOwnerId({ id, isAccepted });
 
     res.status(status_code).send({
         status: status,
@@ -98,5 +117,6 @@ module.exports = {
     handleCreateTransaction, 
     handleGetTransactionByUserId,
     handleGetTransactionByOwnerId,
-    handleUpdateTransactionById
+    handleUpdateTransactionById,
+    handleGetTransactionById
 };
