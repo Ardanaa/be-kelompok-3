@@ -82,16 +82,7 @@ class TransactionsService {
                 };
             }
 
-            if (!isOpened) {
-                return {
-                    status: false,
-                    status_code: 400,
-                    message: "isOpened wajib diisi!",
-                    data: {
-                        created_transaction: null,
-                    },
-                };
-            }
+            
 
             const createdTransaction = await transactionsRepository.handleCreateTransaction({
                 user_id,
@@ -204,6 +195,8 @@ class TransactionsService {
         try {
 
             const getTransactionById = await transactionsRepository.handleGetTransactionById({ id });
+
+            console.log(getTransactionById.product_id);
 
             if (getTransactionById.owner_id == user_id){
                 const updatedTransaction = await transactionsRepository.handleUpdateTransactionById({

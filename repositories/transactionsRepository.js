@@ -49,7 +49,7 @@ class TransactionRepository {
             query.where = { ...query.where, id }
         }
 
-        const getTransactionByOwnerId = await Transactions.findAll(query);
+        const getTransactionByOwnerId = await Transactions.findOne(query);
 
         return getTransactionByOwnerId;
     };
