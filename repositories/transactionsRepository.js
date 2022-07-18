@@ -1,4 +1,5 @@
 const { Transactions, Products, Users } = require("../models");
+const { Op } = require("sequelize");
 
 class TransactionRepository {
 
@@ -84,7 +85,7 @@ class TransactionRepository {
 
     // ------------------------- Handle Get Transaction By Owner Id (Repository) ------------------------- //
 
-    static async handleGetTransactionByOwnerId({ id, isAccepted }){
+    static async handleGetTransactionByOwnerId({ id, isAccepted, isRejected }){
         
         const query = {
             where: {},
@@ -103,6 +104,10 @@ class TransactionRepository {
 
         if (isAccepted) {
             query.where = { ...query.where, isAccepted }
+        }
+
+        if (isRejected) {
+            query.where = { ...query.where, isRejected }
         }
 
         const getTransactionByOwnerId = await Transactions.findAll(query);
@@ -136,6 +141,37 @@ class TransactionRepository {
     }
 
     // ------------------------- End Handle Update Transaction By Id (Repository) ------------------------- //
+
+
+    // ------------------------- Handle Get Transaction Notification (Repository) ------------------------- //
+    
+    static async handleGetTransactionNotification({ id, user_id }){
+
+        const query = {
+            where: {},
+            include: [{
+                model: Products,
+                attributes: ["name", "category", "price", "picture"] 
+            },{
+                model: Users,
+                attributes: ["name", "city", "picture"]
+            }]
+        };
+
+        if (id) {
+            query.where = {
+                ...query.where,
+                [Op.or]: [{ owner_id: { [Op.eq]: id } }, { user_id: { [Op.eq]: id } }]
+            }
+        }
+
+        const getTransactionNotification = await Transactions.findAll(query);
+
+        return getTransactionNotification;
+
+    }
+    
+    // ------------------------- End Handle Get Transaction Notification (Repository) ------------------------- //
 };
 
 module.exports = TransactionRepository;
