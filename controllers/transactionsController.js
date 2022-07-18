@@ -69,9 +69,13 @@ const handleGetTransactionByUserId = async (req, res, next) => {
 const handleGetTransactionByOwnerId = async (req, res, next) => {
     const { id } = req.params;
 
-    const { isAccepted } = req.query;
+    const { isAccepted, isRejected } = req.query;
 
-    const { status, status_code, message, data } = await transactionsService.handleGetTransactionByOwnerId({ id, isAccepted });
+    const { status, status_code, message, data } = await transactionsService.handleGetTransactionByOwnerId({ 
+        id, 
+        isAccepted,
+        isRejected 
+    });
 
     res.status(status_code).send({
         status: status,
@@ -113,10 +117,34 @@ const handleUpdateTransactionById = async (req, res, next) => {
 // ------------------------- End Handle Update Transaction By Id (Controller) ------------------------- //
 
 
+// ------------------------- Handle Get Transaction Notification  (Controller) ------------------------- //
+
+const handleGetTransactionNotification = async (req, res, next) => {
+
+    const { id } = req.params;
+    
+    const user_id = req.user.id;
+
+    const { status, status_code, message, data } = await transactionsService.handleGetTransactionNotification({ 
+        id, 
+        user_id,
+    });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+}
+
+// ------------------------- End Handle Get Transaction Notification (Controller) ------------------------- //
+
+
 module.exports = { 
     handleCreateTransaction, 
     handleGetTransactionByUserId,
     handleGetTransactionByOwnerId,
     handleUpdateTransactionById,
-    handleGetTransactionById
+    handleGetTransactionById,
+    handleGetTransactionNotification
 };

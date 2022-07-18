@@ -75,10 +75,11 @@ app.delete("/v1/products/delete/:id", middleware.authenticate, productsControlle
 // ------------------------- Transaction System ------------------------- //
 
 app.post("/v1/transactions/create", middleware.authenticate, transactionsController.handleCreateTransaction);
-app.get("/v1/transactios/user/:id", middleware.authenticate, transactionsController.handleGetTransactionByUserId);
-app.get("/v1/transactios/owner/:id", middleware.authenticate, transactionsController.handleGetTransactionByOwnerId);
-app.put("/v1/transaction/update/:id", middleware.authenticate, transactionsController.handleUpdateTransactionById);
-app.get("/v1/transaction/:id", middleware.authenticate, transactionsController.handleGetTransactionById);
+app.get("/v1/transactions/user/:id", middleware.authenticate, transactionsController.handleGetTransactionByUserId);
+app.get("/v1/transactions/owner/:id", middleware.authenticate, transactionsController.handleGetTransactionByOwnerId);
+app.put("/v1/transactions/update/:id", middleware.authenticate, transactionsController.handleUpdateTransactionById);
+app.get("/v1/transactions/:id", middleware.authenticate, transactionsController.handleGetTransactionById);
+app.get("/v1/transactions/notification/:id", middleware.authenticate, transactionsController.handleGetTransactionNotification);
 
 // ------------------------- End Transaction System ------------------------- //
 

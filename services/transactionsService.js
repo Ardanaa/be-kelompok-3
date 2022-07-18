@@ -152,10 +152,14 @@ class TransactionsService {
 
     // ------------------------- Handle Get Transaction By Owner Id (Service) ------------------------- //
 
-    static async handleGetTransactionByOwnerId({ id, isAccepted }){
+    static async handleGetTransactionByOwnerId({ id, isAccepted, isRejected }){
         try {
 
-            const getTransactionByOwnerId = await transactionsRepository.handleGetTransactionByOwnerId({ id, isAccepted });
+            const getTransactionByOwnerId = await transactionsRepository.handleGetTransactionByOwnerId({ 
+                id, 
+                isAccepted,
+                isRejected 
+            });
 
             return {
                 status: true,
@@ -240,6 +244,38 @@ class TransactionsService {
     }
     
     // ------------------------- End Handle Update Transaction By Id (Service) ------------------------- //
+
+
+    // ------------------------- Handle Get Transaction Notification (Service) ------------------------- //
+
+    static async handleGetTransactionNotification({ id, user_id }){
+        
+        try {
+
+            const getTransactionNotification = await transactionsRepository.handleGetTransactionNotification({ id, user_id });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "Notifikasi transaksi berhasil didapatkan",
+                data: {
+                    get_transaction_notification: getTransactionNotification,
+                },
+            };
+
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    get_transaction_notification: null,
+                },
+            };
+        }
+    }
+    
+    // ------------------------- End Handle Get Transaction Notification (Service) ------------------------- //
 };
 
 module.exports = TransactionsService;
