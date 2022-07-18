@@ -79,6 +79,7 @@ app.get("/v1/transactios/user/:id", middleware.authenticate, transactionsControl
 app.get("/v1/transactios/owner/:id", middleware.authenticate, transactionsController.handleGetTransactionByOwnerId);
 app.put("/v1/transaction/update/:id", middleware.authenticate, transactionsController.handleUpdateTransactionById);
 app.get("/v1/transaction/:id", middleware.authenticate, transactionsController.handleGetTransactionById);
+app.get("/v1/transaction/notification/:id", middleware.authenticate, transactionsController.handleGetTransactionNotification);
 
 // ------------------------- End Transaction System ------------------------- //
 
