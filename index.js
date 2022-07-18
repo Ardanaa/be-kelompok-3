@@ -78,6 +78,7 @@ app.post("/v1/transactions/create", middleware.authenticate, transactionsControl
 app.get("/v1/transactios/user/:id", middleware.authenticate, transactionsController.handleGetTransactionByUserId);
 app.get("/v1/transactios/owner/:id", middleware.authenticate, transactionsController.handleGetTransactionByOwnerId);
 app.put("/v1/transaction/update/:id", middleware.authenticate, transactionsController.handleUpdateTransactionById);
+app.get("/v1/transaction/:id", middleware.authenticate, transactionsController.handleGetTransactionById);
 
 // ------------------------- End Transaction System ------------------------- //
 

@@ -2,6 +2,37 @@ const transactionsRepository = require("../repositories/transactionsRepository")
 
 class TransactionsService {
 
+    // ------------------------- Handle Get Transaction By Id (Service) ------------------------- //
+
+    static async handleGetTransactionById({ id }) {
+        
+        try {
+            const getTransactionById = await transactionsRepository.handleGetTransactionById({ id });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "Success get transaction by id.",
+                data: {
+                    transaction_by_id: getTransactionById,
+                },
+            };
+
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    transaction_by_id: null,
+                },
+            };
+        }
+    }
+
+    // ------------------------- End Handle Get Transaction By Id (Service) ------------------------- //
+
+
     // ------------------------- Handle Create Transaction (Service) ------------------------- //
 
     static async handleCreateTransaction({ 
@@ -51,16 +82,7 @@ class TransactionsService {
                 };
             }
 
-            if (!isOpened) {
-                return {
-                    status: false,
-                    status_code: 400,
-                    message: "isOpened wajib diisi!",
-                    data: {
-                        created_transaction: null,
-                    },
-                };
-            }
+            
 
             const createdTransaction = await transactionsRepository.handleCreateTransaction({
                 user_id,
@@ -130,10 +152,10 @@ class TransactionsService {
 
     // ------------------------- Handle Get Transaction By Owner Id (Service) ------------------------- //
 
-    static async handleGetTransactionByOwnerId({ id }){
+    static async handleGetTransactionByOwnerId({ id, isAccepted }){
         try {
 
-            const getTransactionByOwnerId = await transactionsRepository.handleGetTransactionByOwnerId({ id });
+            const getTransactionByOwnerId = await transactionsRepository.handleGetTransactionByOwnerId({ id, isAccepted });
 
             return {
                 status: true,
@@ -166,19 +188,23 @@ class TransactionsService {
         id, 
         user_id,
         isAccepted, 
-        isRejected 
+        isRejected,
+        isOpened 
     }) {
 
         try {
 
             const getTransactionById = await transactionsRepository.handleGetTransactionById({ id });
 
+            console.log(getTransactionById.product_id);
+
             if (getTransactionById.owner_id == user_id){
                 const updatedTransaction = await transactionsRepository.handleUpdateTransactionById({
                     id, 
                     user_id,
                     isAccepted, 
-                    isRejected 
+                    isRejected,
+                    isOpened 
                 });
 
                 return {
