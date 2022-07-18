@@ -152,7 +152,7 @@ class TransactionsService {
 
     // ------------------------- Handle Get Transaction By Owner Id (Service) ------------------------- //
 
-    static async handleGetTransactionByOwnerId({ id, isAccepted }){
+    static async handleGetTransactionByOwnerId({ id, isAccepted, isRejected }){
         try {
 
             const getTransactionByOwnerId = await transactionsRepository.handleGetTransactionByOwnerId({ 
