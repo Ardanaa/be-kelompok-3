@@ -1,4 +1,5 @@
 const transactionsRepository = require("../repositories/transactionsRepository");
+const productsRepository = require("../repositories/productsRepository");
 
 class TransactionsService {
 
@@ -197,7 +198,8 @@ class TransactionsService {
         user_id,
         isAccepted, 
         isRejected,
-        isOpened 
+        isOpened,
+        isSold 
     }) {
 
         try {
@@ -207,6 +209,7 @@ class TransactionsService {
             console.log(getTransactionById.product_id);
 
             if (getTransactionById.owner_id == user_id){
+                
                 const updatedTransaction = await transactionsRepository.handleUpdateTransactionById({
                     id, 
                     user_id,
@@ -215,12 +218,18 @@ class TransactionsService {
                     isOpened 
                 });
 
+                const updatedProductById = await productsRepository.handleUpdateProductById({
+                    id: getTransactionById.product_id,
+                    isSold
+                })
+
                 return {
                     status: true,
                     status_code: 200,
                     message: "Transaksi berhasil diubah",
                     data: {
                         updated_transaction: updatedTransaction,
+                        updated_product: updatedProductById,
                     },
                 };
             }else{

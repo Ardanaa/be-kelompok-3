@@ -39,7 +39,7 @@ class TransactionRepository {
             where: {},
             include: [{
                 model: Products,
-                attributes: ["name", "category", "price", "picture"] 
+                attributes: ["name", "category", "price", "picture", "isSold"] 
             },{
                 model: Users,
                 attributes: ["name", "city", "picture"]
@@ -66,7 +66,7 @@ class TransactionRepository {
             where: {},
             include: [{
                 model: Products,
-                attributes: ["name", "category", "price", "picture"] 
+                attributes: ["name", "category", "price", "picture", "isSold"] 
             }]
         };
 
@@ -99,7 +99,7 @@ class TransactionRepository {
             where: {},
             include: [{
                 model: Products,
-                attributes: ["name", "category", "price", "picture"] 
+                attributes: ["name", "category", "price", "picture", "isSold"] 
             },{
                 model: Users,
                 attributes: ["name", "city", "picture"]
@@ -159,7 +159,7 @@ class TransactionRepository {
             where: {},
             include: [{
                 model: Products,
-                attributes: ["name", "category", "price", "picture"] 
+                attributes: ["name", "category", "price", "picture", "isSold"] 
             },{
                 model: Users,
                 attributes: ["name", "city", "picture"]
