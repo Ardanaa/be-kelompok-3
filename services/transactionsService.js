@@ -120,10 +120,14 @@ class TransactionsService {
 
     // ------------------------- Handle Get Transaction By User Id (Service) ------------------------- //
 
-    static async handleGetTransactionByUserId({ id }){
+    static async handleGetTransactionByUserId({ id, isAccepted, isRejected }){
         try {
 
-            const getTransactionByUserId = await transactionsRepository.handleGetTransactionByUserId({ id });
+            const getTransactionByUserId = await transactionsRepository.handleGetTransactionByUserId({ 
+                id,
+                isAccepted, 
+                isRejected 
+            });
 
             return {
                 status: true,

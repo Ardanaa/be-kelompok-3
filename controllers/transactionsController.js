@@ -51,7 +51,13 @@ const handleGetTransactionByUserId = async (req, res, next) => {
 
     const { id } = req.params;
 
-    const { status, status_code, message, data } = await transactionsService.handleGetTransactionByUserId({ id });
+    const { isAccepted, isRejected } = req.query;
+
+    const { status, status_code, message, data } = await transactionsService.handleGetTransactionByUserId({ 
+        id, 
+        isAccepted,
+        isRejected 
+    });
 
     res.status(status_code).send({
         status: status,
