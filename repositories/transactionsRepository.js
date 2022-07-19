@@ -60,7 +60,7 @@ class TransactionRepository {
 
     // ------------------------- Handle Get Transaction By User Id (Repository) ------------------------- //
 
-    static async handleGetTransactionByUserId({ id }){
+    static async handleGetTransactionByUserId({ id, isAccepted, isRejected }){
         
         const query = {
             where: {},
@@ -72,6 +72,14 @@ class TransactionRepository {
 
         if (id) {
             query.where = { ...query.where, user_id: id }
+        }
+
+        if (isAccepted) {
+            query.where = { ...query.where, isAccepted }
+        }
+
+        if (isRejected) {
+            query.where = { ...query.where, isRejected }
         }
 
         const getTransactionByUserId = await Transactions.findAll(query);
