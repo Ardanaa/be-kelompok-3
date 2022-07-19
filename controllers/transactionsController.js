@@ -100,7 +100,7 @@ const handleUpdateTransactionById = async (req, res, next) => {
 
     const { id } = req.params;
 
-    const { isAccepted, isRejected, isOpened } = req.body;
+    const { isAccepted, isRejected, isOpened, isSold } = req.body;
 
     const user_id = req.user.id;
 
@@ -109,7 +109,8 @@ const handleUpdateTransactionById = async (req, res, next) => {
         user_id,
         isAccepted, 
         isRejected,
-        isOpened 
+        isOpened,
+        isSold 
     });
 
     res.status(status_code).send({
