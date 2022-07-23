@@ -1,30 +1,36 @@
-const authController = require("../../controllers/authController");
+const usersRepository = require("../../repositories/usersRepository");
 const models = require("../../models");
 
 describe("Auth unit test", () => {
 
     describe('Successful Operation', () => {
 
-        describe('handleRegister', () => {
-            it('should be returning status code 201 and return the new created user', async () => {
-                const mReq = { body: { name: "sanlokaja", email: "sanlokaja@example.com", password: "sanlokaja1234" } };
-                const mRes = { status: jest.fn().mockReturnThis(), message: jest.fn().mockReturnThis(), data: jest.fn().mockReturnThis() };
-                await authController.handleRegister(mReq, mRes);
+        /* ------------------ Handle Register ------------------ */
 
-                expect(mRes.status).toBeCalledWith(201);
-                models.Users.destroy({ where: { name: "sanlokaja", email: "sanlokaja@example.com" } });
+        describe('registration for new users', () => {
+            it('should be returning the registration for new users', async () => {
+
+                const createdUser = await usersRepository.createNewUser({
+                    name: "user testing",
+                    email: "usertesting123@example.com",
+                    password: "usertesting123"
+                });
+
+                expect(createdUser.name).toEqual("user testing");
+                expect(createdUser.email).toEqual("usertesting123@example.com");
+                expect(createdUser.password).toEqual("usertesting123");
+
+                await models.Users.destroy({
+                    where: {
+                        name: "user testing",
+                        email: "usertesting123@example.com"
+                    }
+                });
             });
         });
 
-        describe('handleLogin', () => {
-            it('should be returning status code 201 and return the acess token', async () => {
-                const mReq = { body: { email: "sanlokaja@example.com", password: "sanlokaja1234" } };
-                const mRes = { status: jest.fn().mockReturnThis(), message: jest.fn().mockReturnThis(), data: jest.fn().mockReturnThis() };
-                await authController.handleLogin(mReq, mRes);
+        /* ------------------ End Handle Register ------------------ */
 
-                expect(mRes.status).toBeCalledWith(201);
-            });
-        });
 
     });
 });
