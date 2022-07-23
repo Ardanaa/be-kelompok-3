@@ -50,9 +50,9 @@ class TransactionRepository {
             query.where = { ...query.where, id }
         }
 
-        const getTransactionByOwnerId = await Transactions.findOne(query);
+        const getTransactionById = await Transactions.findOne(query);
 
-        return getTransactionByOwnerId;
+        return getTransactionById;
     };
 
     // ------------------------- End Handle Get Transaction By Id (Repository) ------------------------- //
