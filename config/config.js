@@ -2,10 +2,10 @@ require("dotenv").config();
 
 module.exports = {
   development: {
-    username: "bigqmwqtwcgcbs",
-    password: "382430240122fb0f256106e773566b76eff3948647cf2eb78a839987d523456f",
-    database: "d3p47loa4mprnc",
-    host: "ec2-50-19-255-190.compute-1.amazonaws.com",
+    username: "gvpxinhauispgg",
+    password: "dfd1766d5804c040afa66b10a6c32ff6472630d40b41bd1ad578659b0cd12d0e",
+    database: "df92893uidvhsg",
+    host: "ec2-3-222-74-92.compute-1.amazonaws.com",
     dialect: "postgres",
     dialectOptions: {
       ssl: {
@@ -22,10 +22,10 @@ module.exports = {
     dialect: "postgres",
   },
   production: {
-    username: "bigqmwqtwcgcbs",
-    password: "382430240122fb0f256106e773566b76eff3948647cf2eb78a839987d523456f",
-    database: "d3p47loa4mprnc",
-    host: "ec2-50-19-255-190.compute-1.amazonaws.com",
+    username: "gvpxinhauispgg",
+    password: "dfd1766d5804c040afa66b10a6c32ff6472630d40b41bd1ad578659b0cd12d0e",
+    database: "df92893uidvhsg",
+    host: "ec2-3-222-74-92.compute-1.amazonaws.com",
     dialect: "postgres",
     dialectOptions: {
       ssl: {
